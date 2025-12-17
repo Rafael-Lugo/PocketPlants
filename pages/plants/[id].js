@@ -1,33 +1,37 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
-export default function MyPlantsPage() {
+export default function PlantDetailPage() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data: plant, isLoading } = useSWR(id ? `/api/plants/${id}` : null);
+  const { data, error, isLoading } = useSWR(id ? `/api/plants/${id}` : null);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <p>Loading...</p>;
   }
 
-  if (!plant) {
+  if (error) {
+    return <p>Failed to load</p>;
+  }
+
+  if (!data) {
     return (
       <div>
-        <h1>Not found</h1>
+        <h2>Not found</h2>
         <p>Plant not found.</p>
       </div>
     );
   }
 
   return (
-    <main>
-      <h1>{plant.name}</h1>
-      <p>{plant.botanicalName}</p>
+    <>
+      <h1>{data.name}</h1>
+      <p>{data.botanicalName}</p>
       <ul>
-        <li>Water: {plant.waterNeed}</li>
-        <li>Light: {plant.lightNeed}</li>
+        <li>{plant.waterNeed}</li>
+        <li>{plant.lightNeed}</li>
       </ul>
-    </main>
+    </>
   );
 }

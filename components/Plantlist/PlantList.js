@@ -1,8 +1,13 @@
+import PlantCard from "./PlantCard";
+
 export default function PlantList({ plants }) {
   return (
     <>
       <ul>
-        <li>Plant list</li>
+        <h2>Plant list</h2>
+        {plants.map((plant)=>(
+          <PlantCard key={plant._id} />
+        ))}
        
       </ul>
     </>

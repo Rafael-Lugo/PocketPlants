@@ -30,8 +30,8 @@ export default function PlantDetailPage() {
       <p>{plant.botanicalName}</p>
       <p>{plant.description}</p>
       <ul>
-        <li>{data.waterNeed}</li>
-        <li>{data.lightNeed}</li>
+        <li>{plant.waterNeed}</li>
+        <li>{plant.lightNeed}</li>
       </ul>
     </>
   );

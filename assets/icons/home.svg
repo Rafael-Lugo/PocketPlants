@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="51.538" height="51.326" viewBox="0 0 51.538 51.326">
+  <g id="home" transform="translate(31.31 31.182)">
+    <g id="Gruppe_57" data-name="Gruppe 57" transform="translate(-31.31 -31.182)">
+      <path id="Pfad_86" data-name="Pfad 86" d="M42.114,51.326H9.424V28.086H0L25.768,0,51.538,28.086H42.114Zm-29.99-2.7H39.413V25.385h5.982L25.768,3.994,6.142,25.385h5.982Z" fill="#edf5c9"/>
+      <path id="Pfad_87" data-name="Pfad 87" d="M153.639,265.087H139.874V254.011a6.883,6.883,0,1,1,13.765,0Zm-11.065-2.7h8.364v-8.375a4.182,4.182,0,1,0-8.364,0Z" transform="translate(-120.988 -213.76)" fill="#edf5c9"/>
+      <path id="Pfad_88" data-name="Pfad 88" d="M173.9,134.088h-3.649a1.106,1.106,0,0,1-1.107-1.106v-3.649a1.107,1.107,0,0,1,1.107-1.106H173.9A1.107,1.107,0,0,1,175,129.332v3.649A1.107,1.107,0,0,1,173.9,134.088Z" transform="translate(-146.304 -110.913)" fill="#edf5c9"/>
+    </g>
+  </g>
+</svg>

@@ -3,7 +3,7 @@ import useSWR from "swr";
 
 
 
-export default function HomePage() {
+export default function HomePage({favoritePlantIds, toggleFavorite}) {
   const { data: plant, isLoading, error } = useSWR("/api/plants");
 
   if (isLoading) return <p>Loading...</p>;
@@ -13,7 +13,9 @@ export default function HomePage() {
   return (
     <div>
       <h1>Plantpal App</h1>
-      <PlantList plants={plant} />
+      <PlantList plants={plant} 
+      favoritePlantIds={favoritePlantIds}
+      toggleFavorite={toggleFavorite}/>
     </div>
   );
 }

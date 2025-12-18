@@ -4,7 +4,7 @@ import useSWR from "swr";
 
 
 export default function HomePage() {
-  const { data, isLoading, error } = useSWR("/api/plants");
+  const { data: plant, isLoading, error } = useSWR("/api/plants");
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Failed to Load</p>;
@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <div>
       <h1>Plantpal App</h1>
-      <PlantList plants={data} />
+      <PlantList plants={plant} />
     </div>
   );
 }

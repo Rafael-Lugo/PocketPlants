@@ -5,7 +5,7 @@ export default function PlantDetailPage() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data, error, isLoading } = useSWR(id ? `/api/plants/${id}` : null);
+  const { data: plant, error, isLoading } = useSWR(id ? `/api/plants/${id}` : null);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -15,7 +15,7 @@ export default function PlantDetailPage() {
     return <p>Failed to load</p>;
   }
 
-  if (!data) {
+  if (!plant) {
     return (
       <div>
         <h2>Not found</h2>
@@ -26,8 +26,9 @@ export default function PlantDetailPage() {
 
   return (
     <>
-      <h1>{data.name}</h1>
-      <p>{data.botanicalName}</p>
+      <h1>{plant.name}</h1>
+      <p>{plant.botanicalName}</p>
+      <p>{plant.description}</p>
       <ul>
         <li>{plant.waterNeed}</li>
         <li>{plant.lightNeed}</li>

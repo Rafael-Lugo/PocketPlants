@@ -12,6 +12,7 @@ export default function PlantList({
         <li key={plant._id}>
           <PlantCard
             plant={plant}
+            imageUrl={plant.imageUrl}
             isFavorite={favoritePlantIds.includes(plant._id)}
             toggleFavorite={toggleFavorite}
           />

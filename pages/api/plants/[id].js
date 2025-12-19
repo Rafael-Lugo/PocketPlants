@@ -19,4 +19,11 @@ export default async function handler(request, response){
         await Plant.findByIdAndDelete(id);
         response.status(200).json({ status: `Joke ${id} succesfully deleted`});
     }
+
+    if (request.method === "PUT"){
+        const plantData = request.body;
+        await Plant.findByIdAndUpdate(id, plantData);
+
+        return response.status(200).json({satus: `Plant ${id} update!` });
+    }
 }

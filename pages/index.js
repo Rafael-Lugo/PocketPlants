@@ -1,6 +1,7 @@
 import PlantList from "@/components/Plantlist/PlantList";
 import useSWR from "swr";
 import { useState } from "react";
+import SearchBar from "@/components/Searchbar/Searchbar";
 
 export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   const { data: plants, isLoading, error } = useSWR("/api/plants");
@@ -16,11 +17,7 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   return (
     <div>
       <h1>Plantpal App</h1>
-      <input
-        type="search"
-        placeholder="Search plants..."
-        value={search}
-        onChange={(event) => setSearch(event.target.value)}
+      <SearchBar search={search} setSearch={setSearch}
       />
       <PlantList
         plants={filterPlants}

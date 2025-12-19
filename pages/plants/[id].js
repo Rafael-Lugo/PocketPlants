@@ -10,6 +10,7 @@ export default function PlantDetailPage() {
     data: plant,
     error,
     isLoading,
+    mutate,
   } = useSWR(id ? `/api/plants/${id}` : null);
 
   if (isLoading) {
@@ -29,36 +30,35 @@ export default function PlantDetailPage() {
     );
   }
 
+  async function handleEdit(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const plantData = Object.fromEntries(formData);
+
+    const response = await fetch(`/api/plants/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(plantData),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+  }
+
   async function handleDelete() {
     const response = await fetch(`/api/plants/${id}`, {
       method: "DELETE",
     });
-    if (response.ok) {
-      router.push("/");
-    }
-
-    async function handleEdit(event) {
-      event.preventDefault();
-      const formData = new FormData(event.target);
-      const plantData = Object.fromEntries(formData);
-
-      const response = await fetch(`/api/plants/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(plantData),
-      });
-
-      if (response.ok) {
-        mutate();
-      }
-    }
+    if (response.ok) router.push("/");
   }
 
   return (
     <>
-      <PlantDetails plant={plant} />
+      <PlantDetails plant={plant} onEdit={handleEdit} />
 
       <button type="button" onClick={handleDelete}>
         Delete

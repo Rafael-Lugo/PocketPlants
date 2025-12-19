@@ -1,9 +1,14 @@
+import { useState } from "react";
 
-export default function PlantDetails({plant}) {
-   
+export default function PlantDetails({ plant, onEdit }) {
+  const [isEditing, setIsEditing] = useState(false);
+
   if (!plant) return null;
 
-    
+  async function handleSubmit(event) {
+    await onEdit(event);
+    setIsEditing(false);
+  }
 
   return (
     <>
@@ -14,11 +19,47 @@ export default function PlantDetails({plant}) {
         alt={plant.name}
         height={300}
       />
-      <p>{plant.description}</p>
-      <ul>
-        <li>{plant.waterNeed}</li>
-        <li>{plant.lightNeed}</li>
-      </ul>
+
+      {!isEditing ? (
+        <>
+          <p>{plant.description}</p>
+          <ul>
+            <li>Water: {plant.waterNeed}</li>
+            <li>Light: {plant.lightNeed}</li>
+          </ul>
+
+          <button type="button" onClick={() => setIsEditing(true)}>
+            Edit
+          </button>
+        </>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <label>
+            Description
+            <textarea name="description" defaultValue={plant.description} />
+          </label>
+
+          <label>
+            Water need
+            <input
+              type="text"
+              name="waterNeed"
+              defaultValue={plant.waterNeed}
+            />
+          </label>
+
+          <label>
+            Light need
+            <input
+              type="text"
+              name="lightNeed"
+              defaultValue={plant.lightNeed}
+            />
+          </label>
+
+          <button type="submit">Save change</button>
+        </form>
+      )}
     </>
   );
 }

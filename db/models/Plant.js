@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const plantSchema = new Schema({
   name: { type: String, required: true },
   imageUrl:{
-    width: {type: String, require: true },
+    width: {type: String, required: true },
      height: { type: String, required: true },
     url: { type: String, required: true },
     public_id:{type: String, required:true},

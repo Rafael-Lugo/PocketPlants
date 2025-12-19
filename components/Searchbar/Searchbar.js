@@ -12,7 +12,7 @@ export default function SearchBar({ search, setSearch }){
         onChange={(event) => handleSearch(event.target.value)}
       />
       <button type="button" onClick={() => handleSearch("")}>
-        Clear
+        remove
       </button>
         </>
     )

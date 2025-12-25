@@ -1,4 +1,10 @@
 import { createGlobalStyle } from "styled-components";
+import { Exo } from "next/font/google";
+
+export const exo = Exo({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default createGlobalStyle`
   *,
@@ -17,6 +23,8 @@ export default createGlobalStyle`
 
    body {
     margin: 0;
-    font-family: system-ui;
+    font-family: ${exo.style.fontFamily};
   }
+
+
 `;

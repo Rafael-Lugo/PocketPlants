@@ -7,6 +7,7 @@ export const NavigationWrapper = styled.nav`
   left: 0;
   width: 100%;
   z-index: 1000;
+  list-style: none;
 
   display: flex;
   justify-content: space-around;
@@ -19,6 +20,7 @@ export const NavigationList = styled.ul`
   display: flex;
   justify-content: center;
   align-self: center;
+  list-style: none;
 `;
 
 export const NavigationItem = styled.li`
@@ -30,7 +32,7 @@ export const NavigationLink = styled(Link)`
   display: flex;
   justify-content: center;
 
-  padding: 0%.5rem;
+  padding: 0.5rem;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;

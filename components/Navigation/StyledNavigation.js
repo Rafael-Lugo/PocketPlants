@@ -7,18 +7,22 @@ export const NavigationWrapper = styled.nav`
   left: 0;
   width: 100%;
   z-index: 1000;
-  list-style: none;
+  
 
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: var(--background-foreground);
-  
+  background: linear-gradient(to top, var(--background-foreground) 0%, rgba(0, 0, 0, 0) 100%);
+  padding: 1rem 0;
+    
 `;
 
 export const NavigationList = styled.ul`
-  display: flex;
-  justify-content: center;
+margin: 0;
+padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
   align-self: center;
   list-style: none;
 `;

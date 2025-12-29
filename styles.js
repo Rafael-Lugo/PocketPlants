@@ -14,17 +14,18 @@ export default createGlobalStyle`
   }
 
    :root{
-    --background: #fff;
-    --background-foreground: #949494ff;
-    --color: #000000ff;
-    --color-primary: #3a3a3aff;
-    --color-accent: #922d2dff;
+    --background: #FCFBEC;
+    --background-foreground: #b2d024;
+    --color: #003333;
+    --primary: #5F7B02;
+    --accent: #14ddce;
+    --secondary: #096830;
+    --terciary: #99CC99
   }
 
    body {
     margin: 0;
     font-family: ${exo.style.fontFamily};
   }
-
 
 `;

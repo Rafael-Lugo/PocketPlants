@@ -19,6 +19,7 @@ export const FavoriteButtonWrapper = styled.button`
   cursor: pointer;
   border: none;
   padding: 0;
+  rotate: 50deg;
   filter: drop-shadow(1px 0px 5px rgba(0, 0, 0, 0.36));
   
   svg {

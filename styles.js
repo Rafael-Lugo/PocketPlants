@@ -16,6 +16,7 @@ export default createGlobalStyle`
    :root{
     --background: #FCFBEC;
     --background-foreground: #b2d024;
+    --background-ground: #fdfdf9ff;
     --color: #003333;
     --primary: #5F7B02;
     --accent: #14ddce;
@@ -39,6 +40,6 @@ export const Titel = styled.h1`
 
   export const Subtitle = styled.h2`
     text-align: center;
-    font-size: 1%.69;
+    font-size: 1.69rem;
     font-weight: 400;
   `

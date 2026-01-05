@@ -47,12 +47,14 @@ export const CardWrapper = styled.article`
   display: block;
   aspect-ratio: 3 / 4;
   margin: 1rem 3rem;
+  
 `;
 
 export const CardLink = styled.a`
   display: block;
   text-decoration: none;
   color: inherit;
+  
 
   &:link,
   &:visited,
@@ -109,7 +111,7 @@ export const CardSubtitle = styled.p`
 export const BookmarkWrapper = styled.div`
   position: absolute;
   bottom: 4rem;
-  right: 0.3rem;
+  right: 0.1rem;
   z-index: 2;
   
 `;

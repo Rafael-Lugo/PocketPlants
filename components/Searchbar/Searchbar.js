@@ -7,7 +7,7 @@ export default function SearchBar({ search, setSearch }){
 
     return(
         <SearchBarWrapper>
-         <input
+         <SearchInput
         type="search"
         placeholder="Search plants..."
         value={search}
@@ -22,4 +22,10 @@ export default function SearchBar({ search, setSearch }){
 
 export const SearchBarWrapper = styled.div`
   display: flex;
-  align-items: start;`
+  align-items: start;
+  background-color: var(--primary);`
+
+  export const SearchInput = styled.input`
+  border: 1px solid var(--primary);
+  background-color: var(--background-ground);
+  `

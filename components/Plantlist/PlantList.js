@@ -29,6 +29,7 @@ display: grid;
 gap: 5px;
 padding: 0;
 margin: 0;
+margin-bottom: 6rem;
 grid-template-columns: 1fr;
 list-style: none;
 justify-content: center;

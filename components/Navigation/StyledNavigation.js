@@ -49,3 +49,23 @@ export const NavigationLink = styled(Link)`
     fill: var(--accent);
   }
 `;
+
+export const ButtonLink = styled(Link)`
+display: grid;
+align-items: end;
+justify-content: center;
+padding: 12px 18px;
+
+background-color: var(--accent);
+color: var(--background-foreground);
+
+font-weight: 600;
+text-decoration: none;
+
+cursor: pointer;
+
+&:hover {
+    background-color: var(--primary);
+}
+
+`;

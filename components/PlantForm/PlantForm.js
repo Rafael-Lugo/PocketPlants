@@ -28,6 +28,19 @@ export default function PlantForm({ onSubmit }) {
         Description <input name="description" />
       </label>
 
+      <label>
+        Fertiliser season <input name="fertiliserSeason" />
+      </label>
+
+       <label>
+        Water need <input name="waterNeed" />
+      </label>
+
+       <label>
+        Light need <input name="lightNeed" />
+      </label>
+ 
+
       <button type="submit">Create plant</button>
     </form>
   );

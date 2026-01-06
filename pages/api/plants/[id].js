@@ -17,7 +17,7 @@ export default async function handler(request, response){
 
     if(request.method === "DELETE"){
         await Plant.findByIdAndDelete(id);
-        response.status(200).json({ status: `Joke ${id} succesfully deleted`});
+        response.status(200).json({ status: `Plant ${id} succesfully deleted`});
     }
 
     if (request.method === "PUT"){
@@ -26,4 +26,6 @@ export default async function handler(request, response){
 
         return response.status(200).json({satus: `Plant ${id} update!` });
     }
+
+    
 }

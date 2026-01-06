@@ -55,7 +55,6 @@ export const CardLink = styled.a`
   text-decoration: none;
   color: inherit;
   
-
   &:link,
   &:visited,
   &:hover,

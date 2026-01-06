@@ -7,7 +7,19 @@ export default async function handler(request, response) {
   if (request.method === "GET") {
     const plants = await Plant.find();
     return response.status(200).json(plants);
-  } 
-    return response.status(405).json({ message: "Method not allowed" });
-  
+  }
+
+  if (request.method === "POST") {
+    try {
+      const plantData = request.body;
+      await Plant.create(plantData);
+
+      response.status(201).json({ message: "Plant created successfully" });
+    } catch (error) {
+      console.error("Error creating plant:", error);
+      response.status(400).json({ error: error.message });
+    }
+  }
+
+  return response.status(405).json({ message: "Method not allowed" });
 }

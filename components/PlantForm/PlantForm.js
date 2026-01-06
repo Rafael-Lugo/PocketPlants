@@ -11,8 +11,24 @@ export default function PlantForm({ onSubmit }) {
   return (
     <form onSubmit={handleSubmit}>
       <label>
+        {" "}
+        Image
+        <input name="imageUrl" />
+      </label>
+
+      <label>
         Name <input name="name" required />
       </label>
+
+      <label>
+        Botanical Name <input name="botanicalName" />
+      </label>
+
+      <label>
+        Description <input name="description" />
+      </label>
+
+      <button type="submit">Create plant</button>
     </form>
   );
 }

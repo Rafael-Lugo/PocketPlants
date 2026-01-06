@@ -7,19 +7,21 @@ export const NavigationWrapper = styled.nav`
   left: 0;
   width: 100%;
   z-index: 1000;
-  
 
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: linear-gradient(to top, var(--background) 75%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(
+    to top,
+    var(--background) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
   padding: 1rem 0;
-    
 `;
 
 export const NavigationList = styled.ul`
-margin: 0;
-padding: 0;
+  margin: 0;
+  padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
@@ -41,36 +43,45 @@ export const NavigationLink = styled(Link)`
   font-size: 1rem;
   font-weight: 500;
 
-    svg path{
-    fill: ${({ $highlighted }) => ($highlighted ? "var(--accent)" : "var(--primary)")};
-    }
+  svg path {
+    fill: ${({ $highlighted }) =>
+      $highlighted ? "var(--accent)" : "var(--primary)"};
+  }
 
   &:hover svg path {
     fill: var(--accent);
   }
 `;
 
-export const ButtonLink = styled(Link)`
-
-align-items: end;
-justify-content: center;
-padding: 12px 18px;
-
-background-color: var(--background-foreground);
-color: var(--background);
-
-font-weight: 600;
-text-decoration: none;
-
-cursor: pointer;
-
-&:hover {
-    background-color: var(--primary);
-}
-
+export const ButtonWrapper = styled.div`
+  display: grid;
+  justify-items: end;
 `;
 
-export const ButtonWrapper = styled.div`
-display: grid;
-justify-items: center;
-`
+export const ButtonLink = styled(Link)`
+  align-items: end;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  justify-items: center;
+
+  background-color: var(--primary);
+  color: var(--background-foreground);
+
+  font-weight: 600;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  svg path {
+    fill: var(--background-foreground);
+  }
+
+  &:hover {
+    background-color: var(--accent);
+    
+    svg path {
+      fill: var(--color);
+    }
+  }
+`;

@@ -51,13 +51,13 @@ export const NavigationLink = styled(Link)`
 `;
 
 export const ButtonLink = styled(Link)`
-display: grid;
+
 align-items: end;
 justify-content: center;
 padding: 12px 18px;
 
-background-color: var(--accent);
-color: var(--background-foreground);
+background-color: var(--background-foreground);
+color: var(--background);
 
 font-weight: 600;
 text-decoration: none;
@@ -69,3 +69,8 @@ cursor: pointer;
 }
 
 `;
+
+export const ButtonWrapper = styled.div`
+display: grid;
+justify-items: center;
+`

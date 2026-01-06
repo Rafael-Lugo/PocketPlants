@@ -3,8 +3,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import SearchBar from "@/components/Searchbar/Searchbar";
 import { Titel } from "@/styles";
-import PlantForm from "@/components/PlantForm/PlantForm";
-import { ButtonLink } from "@/components/Navigation/StyledNavigation";
+import CreatePlantButton from "components/CreatePlantButton/index.js";
 
 export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   const { data: plants, isLoading, error } = useSWR("/api/plants");
@@ -23,7 +22,8 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
       <SearchBar search={search} setSearch={setSearch}
       />
 
-      <ButtonLink href="/create-plant">Create Plant</ButtonLink>
+      <CreatePlantButton />
+      
       <PlantList
         plants={filterPlants}
         favoritePlantIds={favoritePlantIds}
@@ -31,4 +31,4 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
       />
     </div>
   );
-}
+} 

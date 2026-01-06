@@ -1,4 +1,4 @@
-import FavoriteIcon from "../../assets/icons/leaf.svg";
+import FavoriteIcon from "public/assets/icons/leaf.svg";
 import styled from "styled-components";
 
 export default function FavoriteButton({ isFavorite, onToggle }) {

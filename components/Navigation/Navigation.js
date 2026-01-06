@@ -7,9 +7,9 @@ import {
   NavigationWrapper,
 } from "./StyledNavigation";
 
-import Reminder from "@/assets/icons/Reminder.svg";
-import Myplant from "@/assets/icons/myplant.svg";
-import Home from "@/assets/icons/home.svg";
+import Reminder from "public/assets/icons/Reminder.svg";
+import Myplant from "public/assets/icons/myplant.svg";
+import Home from "public/assets/icons/home.svg";
 
 export default function Navigation() {
   const router = useRouter();

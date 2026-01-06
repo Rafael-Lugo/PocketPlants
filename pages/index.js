@@ -23,7 +23,7 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
       <SearchBar search={search} setSearch={setSearch}
       />
 
-      <ButtonLink href="/create">Create Plant</ButtonLink>
+      <ButtonLink href="/create-plant">Create Plant</ButtonLink>
       <PlantList
         plants={filterPlants}
         favoritePlantIds={favoritePlantIds}

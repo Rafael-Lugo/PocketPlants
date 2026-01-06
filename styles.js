@@ -26,8 +26,11 @@ export default createGlobalStyle`
 
    body {
     margin: 0;
+    padding: 0 30px 0;
     font-family: ${exo.style.fontFamily};
+    
     background: var(--background);
+    color: var(--color);
   }
  
 `;

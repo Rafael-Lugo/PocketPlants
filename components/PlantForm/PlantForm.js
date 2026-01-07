@@ -9,6 +9,8 @@ export default function PlantForm({ onSubmit, options }) {
     const fertiliserSeason = formData.getAll("fertiliserSeason");
     const plantData = { ...data, fertiliserSeason };
 
+    const response = await fetch("/api/upload", { method: "POST", body: formData});
+
     onSubmit(plantData);
   }
 

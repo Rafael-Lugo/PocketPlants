@@ -1,15 +1,20 @@
-import styled from "styled-components";
 import { PlantFormWrapper } from "./PlantFormStyled";
 
-export default function PlantForm({ onSubmit }) {
+export default function PlantForm({ onSubmit, options }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const plantData = Object.fromEntries(formData);
+    const data = Object.fromEntries(formData);
+    const fertiliserSeason = formData.getAll("fertiliserSeason");
+    const plantData = { ...data, fertiliserSeason };
 
     onSubmit(plantData);
   }
+
+  const lightNeeds = options?.lightNeeds ?? [];
+  const waterNeeds = options?.waterNeeds ?? [];
+  const seasons = options?.fertiliserSeason ?? [];
 
   return (
     <PlantFormWrapper onSubmit={handleSubmit}>
@@ -20,33 +25,50 @@ export default function PlantForm({ onSubmit }) {
       </label>
 
       <label>
-        Name <input name="name" required />
+        Plant name * <input name="name" required />
       </label>
 
       <label>
-        Botanical Name <input name="botanicalName" />
+        Botanical name * <input name="botanicalName" required />
       </label>
 
       <label>
         Description <input name="description" />
       </label>
 
-      <label>
-        Fertiliser season <input name="fertiliserSeason" />
-      </label>
+      <fieldset>
+        <legend>Light needs *</legend>
+        {lightNeeds.map((need) => (
+          <label key={need}>
+            <input type="radio" name="lightNeed" value={need} required />
+            {need}
+          </label>
+        ))}
+      </fieldset>
 
-       <label>
-        Water need <input name="waterNeed" />
-      </label>
+       <fieldset>
+        <legend>Water needs *</legend>
+        {waterNeeds.map((need) => (
+          <label key={need}>
+            <input type="radio" name="waterNeed" value={need} required />
+            {need}
+          </label>
+        ))}
+      </fieldset>
 
-       <label>
-        Light need <input name="lightNeed" />
-      </label>
- 
+       <fieldset>
+        <legend>Fertiliser season *</legend>
+        {seasons.map((season) => (
+          <label key={season}>
+            <input type="checkbox" name="fertiliserSeason" value={season} />
+            {season}
+          </label>
+        ))}
+      </fieldset>
+
+      
 
       <button type="submit">Create plant</button>
     </PlantFormWrapper>
   );
 }
-
-

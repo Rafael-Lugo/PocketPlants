@@ -6,7 +6,7 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
-      const options = await PlantOptions.find({ type: "plantOptions" });
+      const options = await PlantOptions.findOne({ type: "plantOptions" });
       if (!options) {
         return response.status(404).json({ error: "Plant options not found" });
       }

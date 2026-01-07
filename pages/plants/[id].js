@@ -50,12 +50,17 @@ export default function PlantDetailPage() {
   }
 
   async function handleDelete(id) {
-    await fetch(`/api/plants/${id}`, {
-      method: "DELETE",
-    });
-    router.push("/");
+    const isConfirmed = window.confirm(
+    `Are you sure you want to delete "${plant.name}"?`
+  );
+  if (!isConfirmed) {
+    return;
   }
-
+  await fetch(`/api/plants/${id}`, {
+    method: "DELETE",
+  });
+  router.push("/");
+}
   return (
     <>
       <PlantDetails plant={plant} onEdit={handleEdit} onDelete={handleDelete}/>

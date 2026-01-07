@@ -34,13 +34,7 @@ export default function PlantDetails({ plant, onEdit, onDelete }) {
 
           <button
             type="button"
-            onClick={() => {
-              const ok = window.confirm(
-                'Are you sure you want to delete "${plant.name}"?'
-              );
-              if (!ok) onDelete(plant.id);
-            }}
-          >
+            onClick={() => onDelete(plant._id)}>          
             Delete
           </button>
         </>

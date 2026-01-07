@@ -49,20 +49,17 @@ export default function PlantDetailPage() {
     }
   }
 
-  async function handleDelete() {
-    const response = await fetch(`/api/plants/${id}`, {
+  async function handleDelete(id) {
+    await fetch(`/api/plants/${id}`, {
       method: "DELETE",
     });
-    if (response.ok) router.push("/");
+    router.push("/");
   }
 
   return (
     <>
-      <PlantDetails plant={plant} onEdit={handleEdit} />
-
-      <button type="button" onClick={handleDelete}>
-        Delete
-      </button>
+      <PlantDetails plant={plant} onEdit={handleEdit} onDelete={handleDelete}/>
+      
     </>
   );
 }

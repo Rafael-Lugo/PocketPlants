@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function PlantDetails({ plant, onEdit }) {
+export default function PlantDetails({ plant, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
 
   if (!plant) return null;
@@ -30,6 +30,18 @@ export default function PlantDetails({ plant, onEdit }) {
 
           <button type="button" onClick={() => setIsEditing(true)}>
             Edit
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              const ok = window.confirm(
+                'Are you sure you want to delete "${plant.name}"?'
+              );
+              if (!ok) onDelete(plant.id);
+            }}
+          >
+            Delete
           </button>
         </>
       ) : (

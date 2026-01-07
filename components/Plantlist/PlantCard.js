@@ -20,18 +20,16 @@ export default function PlantCard({ plant, isFavorite, toggleFavorite }) {
         />
       </BookmarkWrapper>
       <CardLink href={`/plants/${plant._id}`}>
-        
-          <CardImageWrapper>
-            <CardImage src={imageSrc} alt={title} height={300} />
-          </CardImageWrapper>
+        <CardImageWrapper>
+          <CardImage src={imageSrc} alt={title} height={300} />
+        </CardImageWrapper>
 
-          <CardContent>
-            <CardTitle>{plant.name}</CardTitle>
-            {plant.botanicalName ? (
-              <CardSubtitle>{plant.botanicalName}</CardSubtitle>
-            ) : null}
-          </CardContent>
-        
+        <CardContent>
+          <CardTitle>{plant.name}</CardTitle>
+          {plant.botanicalName ? (
+            <CardSubtitle>{plant.botanicalName}</CardSubtitle>
+          ) : null}
+        </CardContent>
       </CardLink>
     </CardWrapper>
   );
@@ -47,14 +45,13 @@ export const CardWrapper = styled.article`
   display: block;
   aspect-ratio: 3 / 4;
   margin: 1rem 3rem;
-  
 `;
 
 export const CardLink = styled(Link)`
   display: block;
   text-decoration: none;
   color: inherit;
-  
+
   &:link,
   &:visited,
   &:hover,
@@ -112,5 +109,4 @@ export const BookmarkWrapper = styled.div`
   bottom: 4rem;
   right: 0.1rem;
   z-index: 2;
-  
 `;

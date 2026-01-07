@@ -2,16 +2,14 @@ import { useState } from "react";
 import { PlantFormWrapper } from "./PlantFormStyled";
 
 export default function PlantForm({ onSubmit, options }) {
-  const [isUploading, setIsUploading] = useState(false);
-  const [error, setError] = useState("");
+   const [selectedFile, setSelectedFile] = useState(null);
+  const [submitError, setSubmitError] = useState("");
 
-  const lightNeeds = options?.lightNeeds ?? [];
-  const waterNeeds = options?.waterNeeds ?? [];
-  const seasons = options?.fertiliserSeason ?? [];
+  
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setError("");
+    setSubmitError("");
 
     const formData = new FormData(event.target);
 
@@ -29,57 +27,56 @@ export default function PlantForm({ onSubmit, options }) {
       return;
     }
 
-    if (fertiliserSeason.length === 0) {
-      setError("Please select at least one Fertiliser season.");
+    if (!fertiliserSeason.length) {
+      setSubmitError("Please select at least one fertiliser season.");
       return;
     }
-    let imageUrl = undefined;
+    
+     const plantData = {
+      ...data,
+      fertiliserSeason,
+    };
 
     if (selectedFile) {
-      const uploadForm = new FormData();
-      uploadForm.append("image", selectedFile);
+      const uploadFormData = new FormData();
+      uploadFormData.append("image", selectedFile);
 
       const uploadResponse = await fetch("/api/upload", {
         method: "POST",
-        body: uploadForm,
+        body: uploadFormData,
       });
 
       if (!uploadResponse.ok) {
-        setError("Image upload failed");
+        setSubmitError("Image upload failed");
         return;
       }
 
       const uploadResult = await uploadResponse.json();
 
-      imageUrl = {
-        url: uploadResult.secure_url || uploadResult.url,
+
+      plantData.imageUrl = {
+        url: uploadResult.url,
         width: String(uploadResult.width),
         height: String(uploadResult.height),
-        publicId: uploadResult.public_id,
+        public_id: uploadResult.publicId,
       };
     }
 
-    const plantData = {
-      name: data.name,
-      botanicalName: data.botanicalName,
-      description: data.description || "",
-      lightNeed: data.lightNeed,
-      waterNeed: data.waterNeed,
-      fertiliserSeason,
-      ...(imageUrl ? { imageUrl } : {}),
-    };
-
-    await onSubmit(plantData);
+     onSubmit(plantData);
   }
+
+  const lightNeeds = options?.lightNeeds ?? [];
+  const waterNeeds = options?.waterNeeds ?? [];
+  const seasons = options?.fertiliserSeason ?? [];
 
   return (
     <PlantFormWrapper onSubmit={handleSubmit}>
-      {error ? <p role="alert">{error}</p> : null}
-
+      
       <label>
         Image
         <input
           type="file"
+          name="image"
           accept="image/*"
           onChange={(event) => setSelectedFile(event.target.files?.[0] ?? null)}
         />
@@ -126,6 +123,8 @@ export default function PlantForm({ onSubmit, options }) {
           </label>
         ))}
       </fieldset>
+
+      {submitError ? <p role="alert">{submitError}</p> : null}
 
       <button type="submit">Create plant</button>
     </PlantFormWrapper>

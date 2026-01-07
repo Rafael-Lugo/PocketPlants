@@ -20,16 +20,19 @@ export default async function handler(request, response) {
       return;
     }
 
-    const form = formidable({});
+    const form = formidable({ multiples: false });
 
     const [fields, files] = await form.parse(request);
 
-    const file = files.image[0];
+    const file = files.image?.[0];
     if (!file) {
       return response.status(400).json({ message: "No file uploaded" });
     }
 
-    const result = await cloudinary.v2.uploader.upload(filepath, {
+    const filepath = file.filepath;
+    const newFilename = `plant_${Date.now()}`;
+
+    const result = await cloudinary.uploader.upload(filepath, {
       public_id: newFilename,
       folder: "plants",
     });

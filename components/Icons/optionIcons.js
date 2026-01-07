@@ -1,13 +1,13 @@
 const Light_Icon = {
-    "Full Sun": "/icons/light/full_sun.svg",
-    "Partial Shade": "/icons/light/partial_shade.svg",
-    "Full Shade": "/icons/light/full_shade.svg",
+    "Full Sun": "/assets/icons/light_full-sun.svg",
+    "Partial Shade": "/assets/icons/light_partial-shade.svg",
+    "Full Shade": "/assets/icons/light_full-shade.svg",
 };
 
 const Water_Icon = {
-    "Low": "/icons/water/low.svg",
-    "Medium": "/icons/water/medium.svg",
-    "High": "/icons/water/high.svg",
+    "Low": "/assets/icons/water_low.svg",
+    "Medium": "/assets/icons/water_medium.svg",
+    "High": "/assets/icons/water_high.svg",
 };
 
 export function getLightIconSrc(lightNeed) {

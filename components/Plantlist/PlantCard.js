@@ -20,7 +20,7 @@ export default function PlantCard({ plant, isFavorite, toggleFavorite }) {
         />
       </BookmarkWrapper>
       <CardLink href={`/plants/${plant._id}`}>
-        <CardLink>
+        
           <CardImageWrapper>
             <CardImage src={imageSrc} alt={title} height={300} />
           </CardImageWrapper>
@@ -31,7 +31,7 @@ export default function PlantCard({ plant, isFavorite, toggleFavorite }) {
               <CardSubtitle>{plant.botanicalName}</CardSubtitle>
             ) : null}
           </CardContent>
-        </CardLink>
+        
       </CardLink>
     </CardWrapper>
   );
@@ -50,7 +50,7 @@ export const CardWrapper = styled.article`
   
 `;
 
-export const CardLink = styled.a`
+export const CardLink = styled(Link)`
   display: block;
   text-decoration: none;
   color: inherit;

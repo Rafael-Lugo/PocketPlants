@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Search from "public/assets/icons/Search.svg";
+import { useRef } from "react";
 
 export default function SearchBar({
   search,
@@ -7,72 +8,126 @@ export default function SearchBar({
   isMenuActive,
   setIsMenuActive,
 }) {
-  function handleSearch(searchString) {
-    setSearch(searchString);
+
+  const inputRef = useRef(null);
+
+  function toggleSearch() {
+    setIsMenuActive((prev) => !prev);
+  }
+
+   function handleRemove() {
+    setSearch("");
+    inputRef.current?.focus();
   }
 
   return (
-    <SearchContainer>
-        {!isMenuActive && (
-        <button
-          type="button"
-          aria-label="Open search"
-          onClick={() => setIsMenuActive(true)}
-        >
-          <Search alt="" width="32" height="32" />
-        </button>
-      )}
-        <SearchBarWrapper $isOpen={isMenuActive}>
+ <SearchContainer>
+      <Viewport>
+        <Bar $isOpen={isMenuActive}>
           <SearchInput
-          type="search"
-          placeholder="Search plants..."
-          value={search}
-          onChange={(event) => handleSearch(event.target.value)}
-        />
-          <button type="button" onClick={() => handleSearch("")}>
+            ref={inputRef}
+            type="search"
+            placeholder="Search plants..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            $isOpen={isMenuActive}
+          />
+        <RemoveButton
+            type="button"
+            onClick={handleRemove}
+            $isOpen={isMenuActive}
+            aria-label="Remove search text"
+          >
             remove
-          </button>
+          </RemoveButton>
 
-          <button
-           type="button"
-          aria-label="Close search"
-          onClick={() => setIsMenuActive(false)}
-        >
+            <IconButton
+            type="button"
+            aria-label="Toggle search"
+            onClick={toggleSearch}
+          >
           <Search alt="" width="32" height="32" />
-          </button>
-        </SearchBarWrapper>
-
-       
-      
+        </IconButton>
+        </Bar>
+      </Viewport>
     </SearchContainer>
   );
 }
 
-export const SearchContainer = styled.div`
+const CLOSED_VISIBLE = 64;
+
+const SearchContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-start;
+  padding: 12px 0;
 `;
 
-export const SearchBarWrapper = styled.div`
+const Viewport = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
+const Bar = styled.div`
   display: flex;
   align-items: center;
-  width: 350px;
-  height: 60px;
-  background-color: var(--primary);
-  border-radius: 0 55px 55px 0px;
+
+  height: 64px;
+  max-width: 680px;
+  width: min(680px, 100%);
+
+  background: var(--primary);
+  border-radius: 999px;
+  padding: 8px;
 
   transform: ${({ $isOpen }) =>
-    $isOpen ? "translateX(60px)" : "translateX(-120%)"};
- 
-  
+    $isOpen
+      ? "translateX(0)"
+      : `translateX(calc(-100% + ${CLOSED_VISIBLE}px))`};
+
+  transition: transform 0.35s ease;
+  will-change: transform;
+`;
+
+
+const SearchInput = styled.input`
+  flex: 1;
+  height: 48px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 0 16px;
+
+  background: var(--background-ground);
+   pointer-events: ${({ $isOpen }) => ($isOpen ? "auto" : "none")};
+`;
+
+
+
+const RemoveButton = styled.button`
+  height: 48px;
+  border-radius: 16px;
+  border: none;
+  padding: 0 16px;
+
+  background: rgba(255, 255, 255, 0.6);
+
+  margin-left: 12px;
+
   pointer-events: ${({ $isOpen }) => ($isOpen ? "auto" : "none")};
-
-  transition: transform 0.35s ease, opacity 0.2s ease;
 `;
 
-export const SearchInput = styled.input`
-  border: 1px solid var(--primary);
-  background-color: var(--background-ground);
-`;
+const IconButton = styled.button`
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
 
+  border: none;
+  background: transparent;
+
+  display: grid;
+  place-items: center;
+
+  margin-left: 12px;
+  cursor: pointer;
+`;

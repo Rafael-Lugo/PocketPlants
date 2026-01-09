@@ -1,3 +1,4 @@
+import BackButton from "@/components/BackButton";
 import PlantDetails from "@/components/Plantdetails/PlantDetails";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -97,7 +98,13 @@ export default function PlantDetailPage() {
   }
   return (
     <>
-      <PlantDetails plant={plant} options={options} onEdit={handleEdit} onDelete={handleDelete} />
+      <BackButton href="/" />
+      <PlantDetails
+        plant={plant}
+        options={options}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
     </>
   );
 }

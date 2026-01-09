@@ -43,16 +43,16 @@ export default function SearchBar({
           </RemoveButton>
 
           <IconButton
-  type="button"
-  aria-label="Toggle search"
-  onClick={toggleSearch}
->
-  {isMenuActive ? (
-    <Close alt="Close search" width={48} height={48} />
-  ) : (
-    <Search alt="Open search" width={48} height={48} />
-  )}
-</IconButton>
+            type="button"
+            aria-label="Toggle search"
+            onClick={toggleSearch}
+          >
+            {isMenuActive ? (
+              <Close alt="Close search" width={48} height={48} />
+            ) : (
+              <Search alt="Open search" width={48} height={48} />
+            )}
+          </IconButton>
         </Bar>
       </Viewport>
     </SearchContainer>
@@ -126,17 +126,14 @@ const IconButton = styled.button`
 
     &:hover {
       fill: var(--accent);
-      
     }
   }
 
-  svg path{
+  svg path {
     fill: var(--background-foreground);
-    
 
     &:hover {
       fill: var(--accent);
-      
     }
   }
 `;

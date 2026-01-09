@@ -7,8 +7,8 @@ export default function PlantCard({ plant, isFavorite, toggleFavorite }) {
     return null;
   }
 
-  const imageSrc =
-    plant?.imageUrl?.url ?? plant?.imageUrl ?? "/placeholder.png";
+const imageSrc =
+  plant?.imageUrl?.url ?? plant?.imageUrl ?? "/images/plant-placeholder.png";
   const title = plant?.name ?? "plant";
 
   return (

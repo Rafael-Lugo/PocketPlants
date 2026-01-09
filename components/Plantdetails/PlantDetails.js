@@ -2,19 +2,31 @@ import { useState } from "react";
 import { getWaterIconSrc, getLightIconSrc } from "../Icons/optionIcons";
 import Image from "next/image";
 
-
 export default function PlantDetails({ plant, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   if (!plant) return null;
 
   const water_Icon = getWaterIconSrc(plant.waterNeed);
   const light_Icon = getLightIconSrc(plant.lightNeed);
 
-  const imgSrc = plant?.imageUrl?.url ?? plant?.imageUrl ?? "public/assets/icons/images/placeholder.png";
+  const imgSrc =
+    plant?.imageUrl?.url ?? plant?.imageUrl ?? "/images/plant-placeholder.png";
 
   async function handleSubmit(event) {
-    await onEdit(event);
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+
+        await onEdit({
+          id: plant._id,
+          data,
+          file: selectedFile,
+        });
+        
+    setSelectedFile(null);
     setIsEditing(false);
   }
 
@@ -22,15 +34,16 @@ export default function PlantDetails({ plant, onEdit, onDelete }) {
     <>
       <h1>{plant.name}</h1>
       <p>{plant.botanicalName}</p>
-     <Image src={imgSrc} width={600} height={600} alt={plant.name} />
+      <Image src={imgSrc} width={600} height={600} alt={plant.name} />
 
       {!isEditing ? (
         <>
           <p>{plant.description}</p>
           <ul>
-            <li>Water needs:
+            <li>
+              Water needs:
               {water_Icon && (
-                <Image 
+                <Image
                   src={water_Icon}
                   alt={`Water: ${plant.waterNeed}`}
                   width={32}
@@ -40,7 +53,8 @@ export default function PlantDetails({ plant, onEdit, onDelete }) {
               <span>{plant.waterNeed}</span>
             </li>
 
-            <li>Light needs: 
+            <li>
+              Light needs:
               {light_Icon && (
                 <Image
                   src={light_Icon}
@@ -63,6 +77,17 @@ export default function PlantDetails({ plant, onEdit, onDelete }) {
         </>
       ) : (
         <form onSubmit={handleSubmit}>
+          <label>
+            Change image
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(event) =>
+                setSelectedFile(event.target.files?.[0] ?? null)
+              }
+            />
+          </label>
+
           <label>
             Description
             <textarea name="description" defaultValue={plant.description} />

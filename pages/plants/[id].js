@@ -30,41 +30,71 @@ export default function PlantDetailPage() {
     );
   }
 
-  async function handleEdit(event) {
-    event.preventDefault();
+  async function handleEdit({ id: plantId, data, file }) {
+    const updates = {
+      description: data.description ?? "",
+      waterNeed: data.waterNeed,
+      lightNeed: data.lightNeed,
+    };
 
-    const formData = new FormData(event.target);
-    const plantData = Object.fromEntries(formData);
-
-    const response = await fetch(`/api/plants/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(plantData),
+    Object.keys(updates).forEach((key) => {
+      if (updates[key] === undefined) delete updates[key];
     });
 
-    if (response.ok) {
-      mutate();
+    if (file) {
+      const uploadFormData = new FormData();
+      uploadFormData.append("image", file);
+
+      const uploadResponse = await fetch("/api/upload", {
+        method: "POST",
+        body: uploadFormData,
+      });
+
+      if (!uploadResponse.ok) {
+        console.error("Image upload failed");
+        return;
+      }
+
+      const uploadResult = await uploadResponse.json();
+      const publicId = uploadResult.public_id ?? uploadResult.publicId;
+
+      updates.imageUrl = {
+        url: uploadResult.url,
+        width: String(uploadResult.width),
+        height: String(uploadResult.height),
+        public_id: String(publicId),
+      };
     }
+
+    const response = await fetch(`/api/plants/${plantId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updates),
+    });
+
+    if (!response.ok) {
+      console.error("Update failed");
+      return;
+    }
+
+    await mutate();
   }
 
   async function handleDelete(id) {
     const isConfirmed = window.confirm(
-    `Are you sure you want to delete "${plant.name}"?`
-  );
-  if (!isConfirmed) {
-    return;
+      `Are you sure you want to delete "${plant.name}"?`
+    );
+    if (!isConfirmed) {
+      return;
+    }
+    await fetch(`/api/plants/${id}`, {
+      method: "DELETE",
+    });
+    router.push("/");
   }
-  await fetch(`/api/plants/${id}`, {
-    method: "DELETE",
-  });
-  router.push("/");
-}
   return (
     <>
-      <PlantDetails plant={plant} onEdit={handleEdit} onDelete={handleDelete}/>
-      
+      <PlantDetails plant={plant} onEdit={handleEdit} onDelete={handleDelete} />
     </>
   );
 }

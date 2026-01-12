@@ -1,5 +1,5 @@
 import { ButtonLink, ButtonWrapper } from "../Navigation/StyledNavigation";
-import CreatePlant from "public/assets/icons/create.svg";
+import CreatePlant from "/assets/icons/create.svg";
 
 export default function CreatePlantPage() {
   return (

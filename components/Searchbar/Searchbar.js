@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useRef } from "react";
 
-import Close from "public/assets/icons/close.svg";
-import Search from "public/assets/icons/Search.svg";
+import Close from "/assets/icons/close.svg";
+import Search from "/assets/icons/Search.svg";
 
 export default function SearchBar({
   search,

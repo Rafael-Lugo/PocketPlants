@@ -8,6 +8,7 @@ import CreatePlantButton from "components/CreatePlantButton/index.js";
 export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   const { data: plants, isLoading, error } = useSWR("/api/plants");
   const [search, setSearch] = useState("");
+  const [isMenuActive, setIsMenuActive] = useState(false);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Failed to Load</p>;
@@ -19,11 +20,15 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   return (
     <div>
       <Titel>Plantpal App</Titel>
-      <SearchBar search={search} setSearch={setSearch}
+      <SearchBar
+        search={search}
+        setSearch={setSearch}
+        isMenuActive={isMenuActive}
+        setIsMenuActive={setIsMenuActive}
       />
 
       <CreatePlantButton />
-      
+
       <PlantList
         plants={filterPlants}
         favoritePlantIds={favoritePlantIds}
@@ -31,4 +36,4 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
       />
     </div>
   );
-} 
+}

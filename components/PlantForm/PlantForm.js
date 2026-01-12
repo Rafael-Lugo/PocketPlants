@@ -37,6 +37,15 @@ export default function PlantForm({ onSubmit, options }) {
       fertiliserSeason,
     };
 
+      const PLACEHOLDER_IMAGE = {
+    url: "/images/plant-placeholder.png",
+    width: 600,
+    height: 600,
+    public_id: "placeholder",
+  };
+
+  plantData.imageUrl = PLACEHOLDER_IMAGE;
+
     if (selectedFile) {
       const uploadFormData = new FormData();
       uploadFormData.append("image", selectedFile);
@@ -56,9 +65,9 @@ export default function PlantForm({ onSubmit, options }) {
 
       plantData.imageUrl = {
         url: uploadResult.url,
-        width: String(uploadResult.width),
-        height: String(uploadResult.height),
-        public_id: uploadResult.publicId,
+        width: Number(uploadResult.width),
+        height: Number(uploadResult.height),
+        public_id: uploadResult.public_id,
       };
     }
 

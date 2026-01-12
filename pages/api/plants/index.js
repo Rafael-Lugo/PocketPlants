@@ -12,6 +12,24 @@ export default async function handler(request, response) {
   if (request.method === "POST") {
     try {
       const plantData = request.body;
+
+      const PLACEHOLDER_IMAGE = {
+      url: "/images/plant-placeholder.png",
+      width: "600",
+      height: "600",
+      public_id: "placeholder",
+    };
+
+    if (
+      !plantData.imageUrl ||
+      !plantData.imageUrl.url ||
+      !plantData.imageUrl.width ||
+      !plantData.imageUrl.height ||
+      !plantData.imageUrl.public_id
+    ) {
+      plantData.imageUrl = PLACEHOLDER_IMAGE;
+    }
+    
       await Plant.create(plantData);
 
       response.status(201).json({ message: "Plant created successfully" });

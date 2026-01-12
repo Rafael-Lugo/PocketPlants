@@ -24,7 +24,8 @@ export default async function handler(request, response) {
 
     const [fields, files] = await form.parse(request);
 
-    const file = files.image?.[0];
+    const file = Array.isArray(files.image) ? files.image[0] : files.image;
+
     if (!file) {
       return response.status(400).json({ message: "No file uploaded" });
     }
@@ -39,7 +40,7 @@ export default async function handler(request, response) {
 
     return response.status(200).json({
       url: result.secure_url,
-      publicId: result.public_id,
+      public_id: result.public_id,
       width: result.width,
       height: result.height,
     });

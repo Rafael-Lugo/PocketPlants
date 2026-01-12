@@ -26,7 +26,7 @@ export default function PlantList({
 
 export const PlantListWrapper = styled.ul`
 display: grid;
-gap: 5px;
+gap: 10px;
 padding: 0;
 margin: 0;
 margin-bottom: 6rem;
@@ -37,6 +37,9 @@ justify-content: center;
 background: var(--background);
 color: var(--color);
 
+@media (min-width: 375px) {
+  grid-template-columns: repeat(1, 1fr);
+}
 
 @media (min-width: 520px) {
   grid-template-columns: repeat(2, 1fr);

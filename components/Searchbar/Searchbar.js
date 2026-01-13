@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { useRef } from "react";
 
-import Close from "/assets/icons/close.svg";
-import Search from "/assets/icons/Search.svg";
+import Image from "next/image";
 
 export default function SearchBar({
   search,
@@ -48,9 +47,9 @@ export default function SearchBar({
             onClick={toggleSearch}
           >
             {isMenuActive ? (
-              <Close alt="Close search" width={48} height={48} />
+              <Image src="/assets/icons/close.svg" alt="Close search" width={48} height={48} />
             ) : (
-              <Search alt="Open search" width={48} height={48} />
+              <Image src="/assets/icons/Search.svg" alt="Open search" width={48} height={48} />
             )}
           </IconButton>
         </Bar>

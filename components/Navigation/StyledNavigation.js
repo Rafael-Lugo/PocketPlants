@@ -5,25 +5,30 @@ export const NavigationWrapper = styled.nav`
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  right:0;
+
+  width: 100vw;
+  margin: 0 auto;
   z-index: 1000;
 
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
+  padding: 1rem 0 calc(1rem + env(safe-area-inset-bottom));
+  
   background: linear-gradient(
     to top,
     var(--background) 75%,
     rgba(0, 0, 0, 0) 100%
   );
-  padding: 1rem 0;
+  
 `;
 
 export const NavigationList = styled.ul`
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  max-width: min(420px, 100%);
+  grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   align-self: center;
   list-style: none;

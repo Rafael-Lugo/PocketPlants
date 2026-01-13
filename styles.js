@@ -24,14 +24,21 @@ export default createGlobalStyle`
     --terciary: #99CC99
   }
 
-   body {
+   html, body {
     margin: 0;
     padding: 0 0px 0;
+    overflow-x: hidden;
+
+
     font-family: ${exo.style.fontFamily};
     
     background: var(--background);
     color: var(--color);
   }
+
+  main {
+  padding-bottom: 110px;
+}
  
 `;
 

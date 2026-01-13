@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #6f8e10;
+      }
+
+      .cls-2 {
+        fill: #d56630;
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke: #930;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 20px;
+      }
+
+      .cls-4 {
+        fill: #b2d024;
+      }
+
+      .cls-5 {
+        fill: #9c9;
+      }
+    </style>
+  </defs>
+  <path class="cls-5" d="M10.5,160.51h491v281.02c0,22.65-18.39,41.04-41.04,41.04H51.54c-22.65,0-41.04-18.39-41.04-41.04V160.51h0Z"/>
+  <path class="cls-4" d="M454.35,66.14H57.65c-26.04,0-47.15,21.11-47.15,47.15v47.23h491v-47.23c0-26.04-21.11-47.15-47.15-47.15Z"/>
+  <g>
+    <rect class="cls-1" x="94.18" y="29.43" width="41.3" height="79.16" rx="12" ry="12"/>
+    <rect class="cls-1" x="376.52" y="29.43" width="41.3" height="79.16" rx="12" ry="12"/>
+  </g>
+  <g id="leaf-2">
+    <path id="Pfad_84" data-name="Pfad 84" class="cls-2" d="M128,426.93c85.85,37.5,185.85-1.7,223.35-87.55l46.88-107.33h0c-106.76-46.63-231.12,2.11-277.75,108.87,0,0,0,0,0,0l-30.35,69.47,37.86,16.53Z"/>
+  </g>
+  <path class="cls-3" d="M405.79,244.07c-9.65-3.37-26.76-7.96-46.65-4.6-43.15,7.31-58.83,45.24-112.97,84.96-13.76,10.1-36.19,24.85-67.84,38.13"/>
+</svg>

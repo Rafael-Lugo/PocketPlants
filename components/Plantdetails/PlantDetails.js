@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getWaterIconSrc, getLightIconSrc } from "../Icons/optionIcons";
+import { getWaterIconSrc, getLightIconSrc, getFertiliserIconSrc } from "../Icons/optionIcons";
 import Image from "next/image";
 
 export default function PlantDetails({ plant, options, onEdit, onDelete }) {
@@ -14,6 +14,20 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
 
   const water_Icon = getWaterIconSrc(plant.waterNeed);
   const light_Icon = getLightIconSrc(plant.lightNeed);
+  const fertiliserSeasons = Array.isArray(plant.fertiliserSeason)
+    ? plant.fertiliserSeason
+    : plant.fertiliserSeason
+      ? [plant.fertiliserSeason]
+      : [];
+
+  const fertiliserIcons = fertiliserSeasons
+    .map((season) => ({
+      season,
+      src: getFertiliserIconSrc(season),
+    }))
+    .filter((item) => item.src);
+
+
 
   const imgSrc =
     plant?.imageUrl?.url ?? plant?.imageUrl ?? "/images/plant-placeholder.png";
@@ -24,8 +38,8 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    const fertiliserSeason = formData.getAll("fertiliserSeason");
-    data.fertiliserSeason = fertiliserSeason;
+    const fertiliserSeasons = formData.getAll("fertiliserSeason");
+    data.fertiliserSeason = fertiliserSeasons;
 
     await onEdit({
       id: plant._id,
@@ -75,6 +89,17 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
 
             <li>
               Fertiliser season:
+                <div>
+                  {fertiliserIcons.length ? ( fertiliserIcons.map(({season, src}) => (
+                    <span key={season}>
+                      <Image src={src}  alt={`Fertiliser: ${season}`} width={32}
+                      height={32} />
+                    </span>
+                  ))
+                ):(<span>-</span>
+                  )}
+                </div>
+              
               <span>{plant.fertiliserSeason}</span>
             </li>
           </ul>
@@ -136,7 +161,7 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
                   type="checkbox"
                   name="fertiliserSeason"
                   value={season}
-                  defaultChecked={plant.fertiliserSeason?.includes(season)}
+                  defaultChecked={fertiliserSeasons.includes(season)}
                 />
                 {season}
               </label>

@@ -56,6 +56,7 @@ export const NavigationLink = styled(Link)`
 export const ButtonWrapper = styled.div`
   display: grid;
   justify-items: end;
+  margin-right: 15px;
 `;
 
 export const ButtonLink = styled(Link)`
@@ -79,7 +80,7 @@ export const ButtonLink = styled(Link)`
 
   &:hover {
     background-color: var(--accent);
-    
+
     svg path {
       fill: var(--color);
     }

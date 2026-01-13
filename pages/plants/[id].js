@@ -35,6 +35,8 @@ export default function PlantDetailPage() {
 
   async function handleEdit({ id: plantId, data, file }) {
     const updates = {
+      name: data.name,
+      botanicalName: data.botanicalName,
       description: data.description ?? "",
       waterNeed: data.waterNeed,
       lightNeed: data.lightNeed,

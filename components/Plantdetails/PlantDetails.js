@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getWaterIconSrc, getLightIconSrc } from "../Icons/optionIcons";
+import { getWaterIconSrc, getLightIconSrc, getFertiliserIconSrc } from "../Icons/optionIcons";
 import Image from "next/image";
 
 export default function PlantDetails({ plant, options, onEdit, onDelete }) {
@@ -14,6 +14,7 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
 
   const water_Icon = getWaterIconSrc(plant.waterNeed);
   const light_Icon = getLightIconSrc(plant.lightNeed);
+  const Fertiliser_Icon = getFertiliserIconSrc(plant.fertiliserSeason);
 
   const imgSrc =
     plant?.imageUrl?.url ?? plant?.imageUrl ?? "/images/plant-placeholder.png";
@@ -75,6 +76,14 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
 
             <li>
               Fertiliser season:
+              {Fertiliser_Icon && (
+                <Image
+                  src={Fertiliser_Icon}
+                  alt={`Fertiliser: ${plant.fertiliserSeason}`}
+                  width={32}
+                  height={32}
+                />
+              )}
               <span>{plant.fertiliserSeason}</span>
             </li>
           </ul>

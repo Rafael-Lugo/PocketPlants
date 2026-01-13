@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }) {
   function toggleFavorite(_id) {
     setFavoritePlantIds((favoritePlantIds) =>
       favoritePlantIds.includes(_id)
-        ? favoritePlantIds.filter((plant) => plant !== _id)
+        ? favoritePlantIds.filter((plantId) => plantId !== _id)
         : [...favoritePlantIds, _id]
     );
   }

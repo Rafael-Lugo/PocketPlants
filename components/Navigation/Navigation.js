@@ -8,7 +8,9 @@ import {
 } from "./StyledNavigation";
 
 
-import Image from "next/image";
+import Home from "public/assets/icons/home.svg";
+import MyPlants from "public/assets/icons/myplant.svg";
+import CreatePlant from "public/assets/icons/create.svg";
 
 export default function Navigation() {
   const router = useRouter();
@@ -16,23 +18,23 @@ export default function Navigation() {
   return (
     <NavigationWrapper>
       <NavigationList>
-        {/* <NavigationItem>
-          <NavigationLink href="/reminder" $highlighted={router.pathname === "/reminder"}>
-          <Reminder width={52} height={52} />
+        <NavigationItem>
+          <NavigationLink href="/create-plant" $highlighted={router.pathname === "/create-plant"}>
+          <CreatePlant width={52} height={52} alt="Create Plant" />
           </NavigationLink>
           
-        </NavigationItem> */}
+        </NavigationItem>
 
         <NavigationItem>
           <NavigationLink href="/" $highlighted={router.pathname === "/"}>
-          <Image src="/assets/icons/home.svg" width={52} height={52} alt="Home" />
+          <Home width={52} height={52} alt="Home" />
           
           </NavigationLink>
         </NavigationItem>
 
         <NavigationItem>
           <NavigationLink href="/my-plants" $highlighted={router.pathname === "/my-plants"}>
-          <Image src="/assets/icons/myplant.svg" width={52} height={52} alt="My Plants" />
+          <MyPlants width={52} height={52} alt="My Plants" />
           </NavigationLink>
         </NavigationItem>
       </NavigationList>

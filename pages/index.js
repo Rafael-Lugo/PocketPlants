@@ -27,8 +27,6 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
         setIsMenuActive={setIsMenuActive}
       />
 
-      <CreatePlantButton />
-
       <PlantList
         plants={filterPlants}
         favoritePlantIds={favoritePlantIds}

@@ -16,16 +16,7 @@ export default function PlantForm({ onSubmit, options }) {
     const data = Object.fromEntries(formData);
 
     const fertiliserSeason = formData.getAll("fertiliserSeason");
-
-    if (
-      !data.name ||
-      !data.botanicalName ||
-      !data.lightNeed ||
-      !data.waterNeed
-    ) {
-      setError("please fill all required fields");
-      return;
-    }
+   
 
     if (!fertiliserSeason.length) {
       setSubmitError("Please select at least one fertiliser season.");

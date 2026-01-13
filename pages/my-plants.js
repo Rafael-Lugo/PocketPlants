@@ -8,12 +8,12 @@ export default function MyPlantsPage({ favoritePlantIds, toggleFavorite }) {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Failed to Load</p>;
 
-  const favoritePlants = data.filter((plant) =>
+  const favoritePlants = (data ?? []).filter((plant) =>
     favoritePlantIds.includes(plant._id)
   );
 
   return (
-    <main>
+    <>
       <Titel>My Plants</Titel>
       {favoritePlants.length === 0 ? (
         <Subtitle>no favorites yet</Subtitle>
@@ -24,6 +24,6 @@ export default function MyPlantsPage({ favoritePlantIds, toggleFavorite }) {
           toggleFavorite={toggleFavorite}
         />
       )}
-    </main>
+    </>
   );
 }

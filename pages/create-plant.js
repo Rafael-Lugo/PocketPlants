@@ -9,30 +9,41 @@ export default function CreatePlantPage() {
     useSWR("/api/plant-options");
 
   async function handleCreatePlant(plantData) {
-    const response = await fetch("/api/plants", {
+    try{
+      const response = await fetch("/api/plants", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(plantData),
     });
+    
+    if (!response.ok){
+      let errorData = {};
 
-    if (response.ok) {
-      await mutate();
-      router.push("/");
+      try{
+        errorData = await response.json();
+      } catch{
+
+      }
+
+      console.error("Create failed", errorData);
       return;
     }
-
-    const errorData = await response.json().catch(() => ({}));
-    console.error("Create failed:", errorData);
+      await mutate ();
+      router.push("/");
+    } catch (error){
+      console.error("Network or unexpected error", error);
+    }
   }
+  
 
   if (optionsLoading) {
     return <p>Loading...</p>;
   }
 
   return (
-    <main>
+    <>
       <h1>Create Plant</h1>
       <PlantForm onSubmit={handleCreatePlant} options={options} />
-    </main>
+    </>
   );
 }

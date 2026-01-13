@@ -15,6 +15,10 @@ export default function SearchBar({
     setIsMenuActive((prev) => !prev);
   }
 
+  function handleSearch(event){
+    setSearch(event.target.value.toLowerCase());
+  }
+
   function handleRemove() {
     setSearch("");
     inputRef.current?.focus();
@@ -29,7 +33,7 @@ export default function SearchBar({
             type="search"
             placeholder="Search plants..."
             value={search}
-            onChange={(event) => setSearch(event.target.value)}
+            onChange={handleSearch}
             $isOpen={isMenuActive}
           />
           <RemoveButton

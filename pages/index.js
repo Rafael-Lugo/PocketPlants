@@ -18,7 +18,7 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   );
 
   return (
-    <div>
+    <>
       <Titel>Plantpal App</Titel>
       <SearchBar
         search={search}
@@ -34,6 +34,6 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
         favoritePlantIds={favoritePlantIds}
         toggleFavorite={toggleFavorite}
       />
-    </div>
+    </>
   );
 }

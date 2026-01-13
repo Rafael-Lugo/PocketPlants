@@ -53,67 +53,79 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
 
   return (
     <>
-      <h1>{plant.name}</h1>
-      <p>{plant.botanicalName}</p>
-      <Image src={imgSrc} width={600} height={600} alt={plant.name} />
+    {!isEditing ? (
+      <>
+        <h1>{plant.name}</h1>
+        <p>{plant.botanicalName}</p>
+        <Image src={imgSrc} width={600} height={600} alt={plant.name} />
 
-      {!isEditing ? (
-        <>
-          <p>{plant.description}</p>
-          <ul>
-            <li>
-              Water needs:
-              {water_Icon && (
-                <Image
-                  src={water_Icon}
-                  alt={`Water: ${plant.waterNeed}`}
-                  width={32}
-                  height={32}
-                />
+        <p>{plant.description}</p>
+        <ul>
+          <li>
+            Water needs:
+            {water_Icon && (
+              <Image
+                src={water_Icon}
+                alt={`Water: ${plant.waterNeed}`}
+                width={32}
+                height={32}
+              />
+            )}
+            <span>{plant.waterNeed}</span>
+          </li>
+
+          <li>
+            Light needs:
+            {light_Icon && (
+              <Image
+                src={light_Icon}
+                alt={`Light: ${plant.lightNeed}`}
+                width={32}
+                height={32}
+              />
+            )}
+            <span>{plant.lightNeed}</span>
+          </li>
+
+          <li>
+            Fertiliser season:
+            <div>
+              {fertiliserIcons.length ? (
+                fertiliserIcons.map(({season, src}) => (
+                  <span key={season}>
+                    <Image src={src}  alt={`Fertiliser: ${season}`} width={32}
+                    height={32} />
+                  </span>
+                ))
+              ) : (
+                <span>-</span>
               )}
-              <span>{plant.waterNeed}</span>
-            </li>
+            </div>
+            <span>{plant.fertiliserSeason}</span>
+          </li>
+        </ul>
 
-            <li>
-              Light needs:
-              {light_Icon && (
-                <Image
-                  src={light_Icon}
-                  alt={`Light: ${plant.lightNeed}`}
-                  width={32}
-                  height={32}
-                />
-              )}
-              <span>{plant.lightNeed}</span>
-            </li>
+        <button type="button" onClick={() => setIsEditing(true)}>
+          Edit
+        </button>
 
-            <li>
-              Fertiliser season:
-                <div>
-                  {fertiliserIcons.length ? ( fertiliserIcons.map(({season, src}) => (
-                    <span key={season}>
-                      <Image src={src}  alt={`Fertiliser: ${season}`} width={32}
-                      height={32} />
-                    </span>
-                  ))
-                ):(<span>-</span>
-                  )}
-                </div>
-              
-              <span>{plant.fertiliserSeason}</span>
-            </li>
-          </ul>
-
-          <button type="button" onClick={() => setIsEditing(true)}>
-            Edit
-          </button>
-
-          <button type="button" onClick={() => onDelete(plant._id)}>
-            Delete
-          </button>
-        </>
+        <button type="button" onClick={() => onDelete(plant._id)}>
+          Delete
+        </button>
+      </>
       ) : (
+
         <form onSubmit={handleSubmit}>
+          <label>
+            Name
+            <input name="name" defaultValue={plant.name} required />
+          </label>
+
+          <label>
+            Botanical name
+            <input name="botanicalName" defaultValue={plant.botanicalName} required />
+          </label>
+
           <label>
             Change image
             <input

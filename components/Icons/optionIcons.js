@@ -25,6 +25,6 @@ export function getWaterIconSrc(waterNeed) {
   return Water_Icon[waterNeed] ?? null;
 }
 
-export function getFertiliserIconSrc(fertiliserSeasons) {
-  return Fertiliser_Icon[fertiliserSeasons] ?? null;
+export function getFertiliserIconSrc(season) {
+  return Fertiliser_Icon[season] ?? null;
 }

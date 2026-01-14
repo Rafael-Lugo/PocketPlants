@@ -2,10 +2,20 @@ const path = require("path");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+        pathname: "/**",
+      },
+    ],
+  },
+
   webpack(config) {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
-      public: path.resolve(process.cwd(), "public")
+      public: path.resolve(process.cwd(), "public"),
     };
 
     config.module.rules.push({

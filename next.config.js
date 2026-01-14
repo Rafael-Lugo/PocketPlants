@@ -5,7 +5,7 @@ const nextConfig = {
   webpack(config) {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
-      public: path.resolve(__dirname, "public"),
+      public: path.resolve(process.cwd(), "public")
     };
 
     config.module.rules.push({

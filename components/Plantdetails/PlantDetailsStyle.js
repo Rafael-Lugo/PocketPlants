@@ -45,8 +45,7 @@ export const ContentCard = styled.section`
 `;
 
 export const ImageWrapper = styled.div`
-  position: absolute;
-  align-content: start;
+  position: relative;
   width: 50%;
   aspect-ratio: 3 / 4;
   border-radius: 22px;

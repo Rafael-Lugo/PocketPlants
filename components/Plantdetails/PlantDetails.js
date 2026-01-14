@@ -6,7 +6,11 @@ import {
 } from "../Icons/optionIcons";
 import Image from "next/image";
 import {
+  ContenLabel,
   ContentCard,
+  ContentItem,
+  ContentText,
+  ContentWrapper,
   ImageWrapper,
   SubtitlePage,
   TextWrapper,
@@ -85,9 +89,9 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
             </TextWrapper>
           </ContentCard>
 
-          <ul>
-            <li>
-              Water needs:
+          <ContentWrapper>
+            <ContentItem>
+              <ContentText>Water needs:</ContentText>              
               {water_Icon && (
                 <Image
                   src={water_Icon}
@@ -96,8 +100,8 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
                   height={32}
                 />
               )}
-              <span>{plant.waterNeed}</span>
-            </li>
+              <ContenLabel>{plant.waterNeed}</ContenLabel>
+            </ContentItem>
 
             <li>
               Light needs:
@@ -132,7 +136,7 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
               </div>
               <span>{plant.fertiliserSeason}</span>
             </li>
-          </ul>
+          </ContentWrapper>
 
           <button type="button" onClick={() => setIsEditing(true)}>
             Edit

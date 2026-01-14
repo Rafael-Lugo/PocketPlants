@@ -18,7 +18,7 @@ export const SubtitlePage = styled.h2`
 export const ContentCard = styled.section`
   display: grid;
   grid-template-columns: minmax(140px, 45%) 1fr;
-  gap: 1.25rem;
+  gap: 0.5rem;
 
   background: var(--background-ground);
   border-radius: 36px;
@@ -51,7 +51,7 @@ export const ImageWrapper = styled.div`
   border-radius: 22px;
   overflow: hidden;
 
-  right: 2rem;
+  right: 1.5rem;
 
   box-shadow: 0px 10px 18px rgba(0, 5, 10, 0.18);
 `;
@@ -62,8 +62,74 @@ export const TextWrapper = styled.div`
   gap: 0.75rem;
   min-width: 0;
 
-  p{
+  p {
     margin: 0;
-    
+  }
+`;
+
+export const ContentWrapper = styled.ul`
+  display: grid;
+  list-style: none;
+
+  width: min(980px, calc(100% - 2rem));
+  margin: 1.25rem auto 0;
+  padding: 0;
+  gap: 1.1rem;
+
+  justify-items: center;
+`;
+
+export const ContentItem = styled.li`
+  display: grid;
+  width: min(860px, calc(100% - 2rem));
+  border-radius: 36px;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  background: var(--background-ground);
+
+  padding: 0.95rem 1.1rem;
+  gap: 0.9rem;
+
+  box-shadow: 0px 6px 6px rgba(0, 5, 10, 0.25);
+
+  @media (min-width: 768px) {
+    width: min(900px, calc(100% - 4rem));
+  }
+
+  & > span {
+    justify-self: center;
+    display: grid;
+    place-items: center;
+  }
+
+  & > span img {
+    display: block;
+  }
+`;
+
+export const ContentText = styled.span`
+  justify-self: start;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color);
+  white-space: nowrap;
+
+  @media (max-width: 420px) {
+    font-size: 1.1rem;
+  }
+`;
+
+export const ContenLabel = styled.span`
+  justify-self: end;
+  text-align: right;
+
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color);
+  white-space: nowrap;
+
+  @media (max-width: 420px) {
+    font-size: 1.1rem;
   }
 `;

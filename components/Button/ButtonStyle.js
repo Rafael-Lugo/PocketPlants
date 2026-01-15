@@ -7,7 +7,7 @@ export const ButtonInput = styled.button`
   align-items: center;
 
   height: 35px;
-  width: 60px;
+  width: 30%;
   border-radius: 16px;
 
   color: var(--background-foreground);
@@ -83,3 +83,8 @@ export const DeleteButton = styled.button`
     }
   }
 `;
+
+
+export const SaveButton = styled.button`
+
+`

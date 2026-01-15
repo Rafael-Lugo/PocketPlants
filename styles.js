@@ -3,7 +3,7 @@ import { Exo } from "next/font/google";
 
 export const exo = Exo({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "700", "600"],
 });
 
 export default createGlobalStyle`
@@ -24,6 +24,7 @@ export default createGlobalStyle`
     --terciary: #99CC99;
     --alert: #AA2929;
     --alert-secondary: #651B1B;
+    --mute: #F8F8F8;
   }
 
    html, body {

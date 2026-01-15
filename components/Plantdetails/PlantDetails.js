@@ -23,7 +23,14 @@ import {
 } from "./PlantDetailsStyle";
 import { ButtonInput, DeleteButton } from "../Button/ButtonStyle";
 
-import Delete from "/public/assets/icons/delete.svg"
+import Delete from "/public/assets/icons/delete.svg";
+import {
+  CheckboxGrid,
+  CheckboxLabel,
+  Fieldset,
+  FormGroup,
+  FormWrapper,
+} from "./PlantFormStyle";
 
 export default function PlantDetails({ plant, options, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -151,34 +158,40 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
           </ContentWrapper>
 
           <ActionBar>
+            <ButtonInput
+              type="button"
+              aria-label="edit button"
+              onClick={() => setIsEditing(true)}
+            >
+              Edit
+            </ButtonInput>
 
-          <ButtonInput type="button" aria-label="edit button" onClick={() => setIsEditing(true)}>
-            Edit
-          </ButtonInput>
-
-          <DeleteButton type="button" aria-label="delete button" onClick={() => onDelete(plant._id)}>
-            <Delete alt="delete" width={48} height={48} />
-          </DeleteButton>
-
+            <DeleteButton
+              type="button"
+              aria-label="delete button"
+              onClick={() => onDelete(plant._id)}
+            >
+              <Delete alt="delete" width={48} height={48} />
+            </DeleteButton>
           </ActionBar>
         </>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <label>
+        <FormWrapper onSubmit={handleSubmit}>
+          <FormGroup>
             Name
             <input name="name" defaultValue={plant.name} required />
-          </label>
+          </FormGroup>
 
-          <label>
+          <FormGroup>
             Botanical name
             <input
               name="botanicalName"
               defaultValue={plant.botanicalName}
               required
             />
-          </label>
+          </FormGroup>
 
-          <label>
+          <FormGroup>
             Change image
             <input
               type="file"
@@ -187,14 +200,14 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
                 setSelectedFile(event.target.files?.[0] ?? null)
               }
             />
-          </label>
+          </FormGroup>
 
-          <label>
+          <FormGroup>
             Description
             <textarea name="description" defaultValue={plant.description} />
-          </label>
+          </FormGroup>
 
-          <label>
+          <FormGroup>
             Water need
             <select name="waterNeed" defaultValue={plant.waterNeed} required>
               {waterNeeds.map((need) => (
@@ -203,9 +216,9 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
                 </option>
               ))}
             </select>
-          </label>
+          </FormGroup>
 
-          <label>
+          <FormGroup>
             Light need
             <select name="lightNeed" defaultValue={plant.lightNeed} required>
               {lightNeeds.map((need) => (
@@ -214,26 +227,28 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
                 </option>
               ))}
             </select>
-          </label>
+          </FormGroup>
 
-          <fieldset>
+          <Fieldset>
             <legend>Fertiliser season</legend>
 
-            {seasons.map((season) => (
-              <label key={season}>
-                <input
-                  type="checkbox"
-                  name="fertiliserSeason"
-                  value={season}
-                  defaultChecked={fertiliserSeasons.includes(season)}
-                />
-                {season}
-              </label>
-            ))}
-          </fieldset>
+            <CheckboxGrid>
+              {seasons.map((season) => (
+                <CheckboxLabel key={season}>
+                  <input
+                    type="checkbox"
+                    name="fertiliserSeason"
+                    value={season}
+                    defaultChecked={fertiliserSeasons.includes(season)}
+                  />
+                  {season}
+                </CheckboxLabel>
+              ))}
+            </CheckboxGrid>
+          </Fieldset>
 
-          <button type="submit">Save change</button>
-        </form>
+          <ButtonInput type="submit">Save change</ButtonInput>
+        </FormWrapper>
       )}
     </>
   );

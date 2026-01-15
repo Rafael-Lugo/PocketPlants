@@ -93,7 +93,7 @@ const Bar = styled.div`
   max-width: 680px;
   width: min(100%, 360px);
 
-  background: var(--accent);
+  background: var(--primary);
   border-radius: 0 50px 50px 0;
   padding: 8px;
 

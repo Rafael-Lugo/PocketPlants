@@ -1,7 +1,8 @@
 import Navigation from "@/components/Navigation/Navigation";
-import GlobalStyle from "../styles";
+import GlobalStyle, { AppShell } from "../styles";
 import { SWRConfig } from "swr";
 import { useState, useEffect } from "react";
+import { Leaf } from "@/components/Navigation/StyledNavigation";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
@@ -9,7 +10,7 @@ const STORANGE_KEY = "favoritePlantIds";
 
 export default function App({ Component, pageProps }) {
   const [favoritePlantIds, setFavoritePlantIds] = useState([]);
-  const [hasLoadedFavorites, setHasLoadedFavorites] = useState(false)
+  const [hasLoadedFavorites, setHasLoadedFavorites] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORANGE_KEY);
@@ -40,14 +41,20 @@ export default function App({ Component, pageProps }) {
   return (
     <main>
       <GlobalStyle />
-      <SWRConfig value={{ fetcher }}>
-        <Component
-          {...pageProps}
-          toggleFavorite={toggleFavorite}
-          favoritePlantIds={favoritePlantIds}
-        />
-        <Navigation />
-      </SWRConfig>
+      <Leaf
+        style={{ left: "-55px", top: "-55px", transform: "rotate(180deg)" }}
+      />
+
+      <AppShell>
+        <SWRConfig value={{ fetcher }}>
+          <Component
+            {...pageProps}
+            toggleFavorite={toggleFavorite}
+            favoritePlantIds={favoritePlantIds}
+          />
+          <Navigation />
+        </SWRConfig>
+      </AppShell>
     </main>
   );
 }

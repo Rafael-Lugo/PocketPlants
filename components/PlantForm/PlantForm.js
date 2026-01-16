@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { PlantFormWrapper } from "./PlantFormStyled";
+import {
+  ButtonInput,
+  ButtonRow,
+  CheckboxGrid,
+  CheckboxLabel,
+  Fieldset,
+  FormGroup,
+  PlantFormWrapper,
+} from "./PlantFormStyled";
 
 export default function PlantForm({ onSubmit, options }) {
-   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [submitError, setSubmitError] = useState("");
-
-  
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -16,26 +22,25 @@ export default function PlantForm({ onSubmit, options }) {
     const data = Object.fromEntries(formData);
 
     const fertiliserSeason = formData.getAll("fertiliserSeason");
-   
 
     if (!fertiliserSeason.length) {
       setSubmitError("Please select at least one fertiliser season.");
       return;
     }
-    
-     const plantData = {
+
+    const plantData = {
       ...data,
       fertiliserSeason,
     };
 
-      const PLACEHOLDER_IMAGE = {
-    url: "/images/plant-placeholder.png",
-    width: 600,
-    height: 600,
-    public_id: "placeholder",
-  };
+    const PLACEHOLDER_IMAGE = {
+      url: "/images/plant-placeholder.png",
+      width: 600,
+      height: 600,
+      public_id: "placeholder",
+    };
 
-  plantData.imageUrl = PLACEHOLDER_IMAGE;
+    plantData.imageUrl = PLACEHOLDER_IMAGE;
 
     if (selectedFile) {
       const uploadFormData = new FormData();
@@ -53,7 +58,6 @@ export default function PlantForm({ onSubmit, options }) {
 
       const uploadResult = await uploadResponse.json();
 
-
       plantData.imageUrl = {
         url: uploadResult.url,
         width: Number(uploadResult.width),
@@ -62,7 +66,7 @@ export default function PlantForm({ onSubmit, options }) {
       };
     }
 
-     onSubmit(plantData);
+    onSubmit(plantData);
   }
 
   const lightNeeds = options?.lightNeeds ?? [];
@@ -71,8 +75,7 @@ export default function PlantForm({ onSubmit, options }) {
 
   return (
     <PlantFormWrapper onSubmit={handleSubmit}>
-      
-      <label>
+      <FormGroup>
         Image
         <input
           type="file"
@@ -80,53 +83,63 @@ export default function PlantForm({ onSubmit, options }) {
           accept="image/*"
           onChange={(event) => setSelectedFile(event.target.files?.[0] ?? null)}
         />
-      </label>
+      </FormGroup>
 
-      <label>
+      <FormGroup>
         Plant name * <input name="name" required />
-      </label>
+      </FormGroup>
 
-      <label>
+      <FormGroup>
         Botanical name * <input name="botanicalName" required />
-      </label>
+      </FormGroup>
 
-      <label>
+      <FormGroup>
         Description <input name="description" />
-      </label>
+      </FormGroup>
 
-      <fieldset>
+      <Fieldset>
         <legend>Light needs *</legend>
-        {lightNeeds.map((need) => (
-          <label key={need}>
-            <input type="radio" name="lightNeed" value={need} required />
-            {need}
-          </label>
-        ))}
-      </fieldset>
+        <CheckboxGrid>
+          {lightNeeds.map((need) => (
+            <CheckboxLabel key={need}>
+              <input type="radio" name="lightNeed" value={need} required />
+              {need}
+            </CheckboxLabel>
+          ))}
+        </CheckboxGrid>
+      </Fieldset>
 
-      <fieldset>
+      <Fieldset>
         <legend>Water needs *</legend>
-        {waterNeeds.map((need) => (
-          <label key={need}>
-            <input type="radio" name="waterNeed" value={need} required />
-            {need}
-          </label>
-        ))}
-      </fieldset>
+        <CheckboxGrid>
+          {waterNeeds.map((need) => (
+            <CheckboxLabel key={need}>
+              <input type="radio" name="waterNeed" value={need} required />
+              {need}
+            </CheckboxLabel>
+          ))}
+        </CheckboxGrid>
+      </Fieldset>
 
-      <fieldset>
+      <Fieldset>
         <legend>Fertiliser season *</legend>
-        {seasons.map((season) => (
-          <label key={season}>
-            <input type="checkbox" name="fertiliserSeason" value={season} />
-            {season}
-          </label>
-        ))}
-      </fieldset>
+        <CheckboxGrid>
+          {seasons.map((season) => (
+            <CheckboxLabel key={season}>
+              <input type="checkbox" name="fertiliserSeason" value={season} />
+              {season}
+            </CheckboxLabel>
+          ))}
+        </CheckboxGrid>
+      </Fieldset>
 
       {submitError ? <p role="alert">{submitError}</p> : null}
 
-      <button type="submit">Create plant</button>
+      <ButtonRow>
+        <ButtonInput aria-label="create plant" type="submit">
+          Create plant
+        </ButtonInput>
+      </ButtonRow>
     </PlantFormWrapper>
   );
 }

@@ -35,7 +35,7 @@ export const PlantListWrapper = styled.ul`
   list-style: none;
   justify-content: center;
 
-  background: var(--background);
+  background: transparent;
   color: var(--color);
 
   transform: translateY(0);
@@ -70,7 +70,7 @@ const PlantListItem = styled.li`
 `;
 
 export const TitelPage = styled.h2`
-  background-color: var(--background);
+  
   text-align: center;
   grid-column: 1 / -1;
 `;

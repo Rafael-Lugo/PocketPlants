@@ -1,6 +1,12 @@
 import PlantForm from "@/components/PlantForm/PlantForm";
+import { Titel } from "@/styles";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { useState } from "react";
+import {
+  SuccessMessage,
+  SuccessOverlay,
+} from "@/components/PlantForm/PlantFormStyled";
 
 export default function CreatePlantPage() {
   const router = useRouter();
@@ -8,33 +14,36 @@ export default function CreatePlantPage() {
   const { data: options, isLoading: optionsLoading } =
     useSWR("/api/plant-options");
 
+  const [successMessage, setSuccesMessage] = useState("");
+
   async function handleCreatePlant(plantData) {
-    try{
+    try {
       const response = await fetch("/api/plants", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(plantData),
-    });
-    
-    if (!response.ok){
-      let errorData = {};
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(plantData),
+      });
 
-      try{
-        errorData = await response.json();
-      } catch{
+      if (!response.ok) {
+        let errorData = {};
 
+        try {
+          errorData = await response.json();
+        } catch {}
+
+        console.error("Create failed", errorData);
+        return;
       }
+      await mutate();
+      setSuccesMessage("Plant successfully created");
 
-      console.error("Create failed", errorData);
-      return;
-    }
-      await mutate ();
-      router.push("/");
-    } catch (error){
+      setTimeout(() => {
+        router.push("/");
+      }, 1200);
+    } catch (error) {
       console.error("Network or unexpected error", error);
     }
   }
-  
 
   if (optionsLoading) {
     return <p>Loading...</p>;
@@ -42,7 +51,16 @@ export default function CreatePlantPage() {
 
   return (
     <>
-      <h1>Create Plant</h1>
+      <Titel>Create Plant</Titel>
+
+      {successMessage && (
+        <SuccessOverlay>
+          <SuccessMessage role="status" aria-label="polite">
+            {successMessage}
+          </SuccessMessage>
+        </SuccessOverlay>
+      )}
+
       <PlantForm onSubmit={handleCreatePlant} options={options} />
     </>
   );

@@ -56,3 +56,30 @@ export const Subtitle = styled.h2`
   font-size: 1.69rem;
   font-weight: 400;
 `;
+
+export const AppShell = styled.main`
+  position: relative;
+  z-index: 1; 
+`;
+
+export const HeaderWrapper = styled.header`
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 1.25rem;
+text-align: left;
+padding: 0 1rem;
+margin:2rem auto 0.5rem;
+`
+
+export const AppIconWrapper = styled.span`
+  display: grid;
+  place-items: center;
+  
+
+  svg {
+    width: 72px;
+    height: 72px;
+  }
+
+  `

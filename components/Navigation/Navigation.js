@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
+  Leaf,
   NavigationItem,
   NavigationLink,
   NavigationList,
@@ -11,12 +12,15 @@ import Home from "public/assets/icons/home.svg";
 import MyPlants from "public/assets/icons/myplant.svg";
 import CreatePlant from "public/assets/icons/create.svg";
 
+
+
 export default function Navigation() {
   const router = useRouter();
   const isActive = (href) => router.pathname === href;
 
   return (
     <NavigationWrapper>
+      
       <NavigationList>
         <NavigationItem>
           <NavigationLink
@@ -48,6 +52,9 @@ export default function Navigation() {
           </NavigationLink>
         </NavigationItem>
       </NavigationList>
+
+       <Leaf aria-hidden style={{ left: "-45px", bottom: "-55px", transform: "scaleX(1) rotate(35deg)" }} />
+      <Leaf aria-hidden style={{ right: "-45px", bottom: "-55px", transform: "scaleX(-1) rotate(35deg)" }} />
     </NavigationWrapper>
   );
 }

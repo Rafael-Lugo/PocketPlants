@@ -58,6 +58,7 @@ export const CardWrapper = styled.article`
     align-self: center;
 
     transform: scale(1.1);
+    transition: background-color 0.2s ease-in-out;
   }
 `;
 

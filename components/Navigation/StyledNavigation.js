@@ -1,11 +1,14 @@
 import Link from "next/link";
 import styled from "styled-components";
 
+import LeafIcon from "@/public/symbol/leaf-symbol.svg"
+
 export const NavigationWrapper = styled.nav`
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  overflow: hidden;
 
   width: 100vw;
   margin: 0 auto;
@@ -34,6 +37,7 @@ export const NavigationList = styled.ul`
   align-self: center;
   list-style: none;
   gap: 0.5rem;
+  z-index: 2;
 `;
 
 export const NavigationItem = styled.li`
@@ -119,3 +123,17 @@ export const ButtonLink = styled(Link)`
     }
   }
 `;
+
+export const Leaf = styled(LeafIcon)`
+position: fixed;
+width: 140px;
+height: auto;
+
+color: var(--terciary);
+opacity: 0.5;
+pointer-events: none;
+
+z-index: 0;
+
+
+`

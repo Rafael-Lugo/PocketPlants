@@ -2,8 +2,9 @@ import PlantList from "@/components/Plantlist/PlantList";
 import useSWR from "swr";
 import { useState } from "react";
 import SearchBar from "@/components/Searchbar/Searchbar";
-import { Titel, Subtitle } from "@/styles";
-import { Leaf } from "@/components/Navigation/StyledNavigation";
+import { Titel, Subtitle, HeaderWrapper, AppIconWrapper } from "@/styles";
+
+import Logo from "@/public/assets/icons/plantpal-icon.svg";
 
 export default function HomePage({ favoritePlantIds, toggleFavorite }) {
   const { data: plants, isLoading, error } = useSWR("/api/plants");
@@ -19,25 +20,29 @@ export default function HomePage({ favoritePlantIds, toggleFavorite }) {
 
   return (
     <>
-    <Titel>Plantpal App</Titel>
+      <HeaderWrapper>
+        <AppIconWrapper>
+          <Logo />
+        </AppIconWrapper>
+        <Titel>Plantpal</Titel>
+      </HeaderWrapper>
 
-    <SearchBar
-      search={search}
-      setSearch={setSearch}
-      isMenuActive={isMenuActive}
-      setIsMenuActive={setIsMenuActive}
-    />
-
-    {search && filterPlants?.length === 0 ? (
-      <Subtitle>No plants found</Subtitle>
-    ) : (
-      <PlantList
-        plants={filterPlants}
-        favoritePlantIds={favoritePlantIds}
-        toggleFavorite={toggleFavorite}
+      <SearchBar
+        search={search}
+        setSearch={setSearch}
+        isMenuActive={isMenuActive}
+        setIsMenuActive={setIsMenuActive}
       />
-    )}
-   
-  </>
+
+      {search && filterPlants?.length === 0 ? (
+        <Subtitle>No plants found</Subtitle>
+      ) : (
+        <PlantList
+          plants={filterPlants}
+          favoritePlantIds={favoritePlantIds}
+          toggleFavorite={toggleFavorite}
+        />
+      )}
+    </>
   );
 }

@@ -14,7 +14,7 @@ export default createGlobalStyle`
   }
 
    :root{
-    --background: #FCFBEC;
+    --background: #F0F4E9;
     --background-foreground: #b2d024;
     --background-ground: #FFFFFF;
     --color: #003333;

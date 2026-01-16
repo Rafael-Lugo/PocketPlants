@@ -2,12 +2,19 @@ import PlantForm from "@/components/PlantForm/PlantForm";
 import { Titel } from "@/styles";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { useState } from "react";
+import {
+  SuccessMessage,
+  SuccessOverlay,
+} from "@/components/PlantForm/PlantFormStyled";
 
 export default function CreatePlantPage() {
   const router = useRouter();
   const { mutate } = useSWR("/api/plants");
   const { data: options, isLoading: optionsLoading } =
     useSWR("/api/plant-options");
+
+  const [successMessage, setSuccesMessage] = useState("");
 
   async function handleCreatePlant(plantData) {
     try {
@@ -28,7 +35,11 @@ export default function CreatePlantPage() {
         return;
       }
       await mutate();
-      router.push("/");
+      setSuccesMessage("Plant successfully created");
+
+      setTimeout(() => {
+        router.push("/");
+      }, 1200);
     } catch (error) {
       console.error("Network or unexpected error", error);
     }
@@ -41,6 +52,15 @@ export default function CreatePlantPage() {
   return (
     <>
       <Titel>Create Plant</Titel>
+
+      {successMessage && (
+        <SuccessOverlay>
+          <SuccessMessage role="status" aria-label="polite">
+            {successMessage}
+          </SuccessMessage>
+        </SuccessOverlay>
+      )}
+
       <PlantForm onSubmit={handleCreatePlant} options={options} />
     </>
   );

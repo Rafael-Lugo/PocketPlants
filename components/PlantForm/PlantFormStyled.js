@@ -158,3 +158,26 @@ export const ButtonInput = styled.button`
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.18);
   }
 `;
+
+export const SuccessMessage = styled.p`
+  background: var(--background-foreground);
+  color: var(--color);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
+`;
+
+export const SuccessOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
+`;

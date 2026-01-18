@@ -110,6 +110,7 @@ const SearchInput = styled.input`
   flex: 1;
   height: 48px;
   min-width: 0;
+  font-size: 1.31rem;
 
   border-radius: 999px;
   border: 3px solid var(--accent);

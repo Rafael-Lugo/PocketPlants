@@ -21,7 +21,7 @@ export default function PlantCard({ plant, isFavorite, toggleFavorite }) {
       </BookmarkWrapper>
       <CardLink href={`/plants/${plant._id}`}>
         <CardImageWrapper>
-          <CardImage src={imageSrc} alt={title} height={300} />
+          <CardImage src={imageSrc} alt={title} />
         </CardImageWrapper>
 
         <CardContent>
@@ -66,7 +66,6 @@ export const CardLink = styled(Link)`
   display: block;
   text-decoration: none;
   color: inherit;
-  transform: scale(0.97);
 
   &:link,
   &:visited,
@@ -82,6 +81,7 @@ export const CardLink = styled(Link)`
 `;
 
 export const CardImageWrapper = styled.div`
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;

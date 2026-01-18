@@ -17,7 +17,7 @@ export const SubtitlePage = styled.h2`
 
 export const ContentCard = styled.section`
   display: grid;
-  grid-template-columns: minmax(140px, 45%) 1fr;
+  grid-template-columns: 1fr;
   gap: 0.5rem;
 
   background: var(--background-ground);
@@ -47,8 +47,8 @@ export const ContentCard = styled.section`
 export const ImageWrapper = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
-  border-radius: 25px;
+  aspect-ratio: 16 / 9;
+  border-radius: 22px;
   overflow: hidden;
 
   right: 0.5rem;

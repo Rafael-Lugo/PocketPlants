@@ -91,7 +91,7 @@ export default function PlantDetails({ plant, options, onEdit, onDelete }) {
                 src={imgSrc}
                 alt={plant.name}
                 fill
-                sizes="(max-width: 768px) 45vw, 360px"
+                sizes="(max-width: 768px) 100vw, 360px"
                 style={{ objectFit: "cover" }}
                 priority
               />

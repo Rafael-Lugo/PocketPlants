@@ -203,7 +203,7 @@ Push to GitHub and connect the repository to Vercel.
 ## 👤 Author
 
 **Rafael Lugo**
-Plant Pal App
+PocketPlants (plantpal app)
 Fullstack Next.js project with focus on **UX, component architecture, and clean code**.
 
 ## License

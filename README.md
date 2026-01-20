@@ -1,4 +1,4 @@
-# 🌱 PocketPlants
+# 🌱 PocketPlants (plantpal app)
 
 **PocketPlants** is a full-stack plant management web application built with **Next.js**.
 It helps users keep track of important plant care information such as **watering needs**, **fertilizing seasons**, and **light requirements**, all in one intuitive and visually guided interface.

@@ -34,7 +34,7 @@ export default function RegisterPage() {
     });
 
     if (loginResult?.error) {
-      setErrorMessage("Account created, but loging failed. Please sign in.");
+      setErrorMessage("Account created, but login failed. Please sign in.");
       return;
     }
 
@@ -78,7 +78,7 @@ export default function RegisterPage() {
     <main style={{ padding: 16 }}>
       <h1>Register</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <label>
           Name
           <input value={formState.name} onChange={handleNameChange} />
@@ -88,7 +88,11 @@ export default function RegisterPage() {
 
         <label>
           Email
-          <input value={formState.email} onChange={handleEmailChange} />
+          <input
+            type="email"
+            value={formState.email}
+            onChange={handleEmailChange}
+          />
         </label>
 
         <br />

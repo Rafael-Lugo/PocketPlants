@@ -1,7 +1,6 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import LoginForm from "./LoginForm";
 
-
 export default function Login() {
   const { data: session, status } = useSession();
 
@@ -28,11 +27,7 @@ export default function Login() {
         Sign in with GitHub
       </button>
 
-      <hr/>
-
-      <LoginForm />
-
-
+      <button onClick={() => router.push("/register")}>Create account</button>
     </div>
   );
 }

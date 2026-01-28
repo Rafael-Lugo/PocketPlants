@@ -2,46 +2,64 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 
 export default function LoginForm() {
-  const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit(submitEvent) {
     submitEvent.preventDefault();
     setErrorMessage("");
+    setIsSubmitting(true);
 
-    const loginResult = await signIn("credentials", {
+    const result = await signIn("credentials", {
       redirect: false,
-      email: emailValue,
-      password: passwordValue,
+      email,
+      password,
     });
 
-    if (loginResult?.error) {
-      setErrorMessage("Invalid email or password");
+    setIsSubmitting(false);
+
+    if (result?.error) {
+      setErrorMessage("Login failed. Check email and password.");
+      return;
     }
+
+    setEmail("");
+    setPassword("");
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h4>Email Login</h4>
+    <form onSubmit={handleSubmit} style={{ display: "grid", gap: 8 }}>
+      <label style={{ display: "grid", gap: 4 }}>
+        Email
+        <input
+          type="email"
+          value={email}
+          onChange={(changeEvent) => setEmail(changeEvent.target.value)}
+          autoComplete="email"
+          required
+        />
+      </label>
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={emailValue}
-        onChange={(changeEvent) => setEmailValue(changeEvent.target.value)}
-      />
+      <label style={{ display: "grid", gap: 4 }}>
+        Password
+        <input
+          type="password"
+          value={password}
+          onChange={(changeEvent) => setPassword(changeEvent.target.value)}
+          autoComplete="current-password"
+          required
+          minLength={8}
+        />
+      </label>
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={passwordValue}
-        onChange={(changeEvent) => setPasswordValue(changeEvent.target.value)}
-      />
+      {errorMessage ? <p style={{ color: "red" }}>{errorMessage}</p> : null}
 
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-
-      <button type="submit">Sign in</button>
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? "Signing in..." : "Sign in"}
+      </button>
     </form>
   );
 }

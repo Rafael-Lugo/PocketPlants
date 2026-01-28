@@ -4,6 +4,7 @@ import { SWRConfig } from "swr";
 import { useState, useEffect } from "react";
 import { Leaf } from "@/components/Navigation/StyledNavigation";
 import { SessionProvider } from "next-auth/react";
+import Login from "@/components/Login";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
@@ -49,6 +50,7 @@ export default function App({
         <Leaf
           style={{ left: "-55px", top: "-55px", transform: "rotate(180deg)" }}
         />
+        <Login />
 
         <AppShell>
           <SWRConfig value={{ fetcher }}>

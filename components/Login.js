@@ -1,13 +1,16 @@
-import Github from "next-auth/providers/github";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Login() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return null;
+  }
 
   if (session) {
     return (
       <div>
-        Signed in as {session.user.email || session.user.name}
+        Signed in as {session.user?.email || session.user?.name}
         <button type="button" onClick={() => signOut()}>
           Sign out
         </button>

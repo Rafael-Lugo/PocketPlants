@@ -8,7 +8,8 @@ import {
   SuccessOverlay,
 } from "@/components/PlantForm/PlantFormStyled";
 
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import AccessDenied from "@/components/auth/AccesDenied";
 
 export default function CreatePlantPage() {
   const router = useRouter();
@@ -25,13 +26,9 @@ export default function CreatePlantPage() {
   }
   if (status === "unauthenticated") {
     return (
-      <>
-        <Titel>Create Plant </Titel>
-        <p>Acces denied. Please sign in to create a plant.</p>
-        {/* <button type="button" onClick={() => signIn("github")}>
-          Sign in with GitHub
-        </button> */}
-      </>
+      <AccessDenied
+      title="Acces denied"
+      message="Please sign in to create a plant."/>
     );
   }
 
@@ -44,20 +41,15 @@ export default function CreatePlantPage() {
       });
 
       if (response.status === 401) {
-        alert("Please sign in to create a plant.");
         return;
       }
 
       if (!response.ok) {
-        let errorData = {};
-
-        try {
-          errorData = await response.json();
-        } catch {}
-
+        const errorData = await response.json().catch(() => ({}));
         console.error("Create failed", errorData);
         return;
       }
+
       await mutate();
       setSuccesMessage("Plant successfully created");
 
@@ -77,13 +69,13 @@ export default function CreatePlantPage() {
     <>
       <Titel>Create Plant</Titel>
 
-      {successMessage && (
+      {successMessage ? (
         <SuccessOverlay>
           <SuccessMessage role="status" aria-label="polite">
             {successMessage}
           </SuccessMessage>
         </SuccessOverlay>
-      )}
+      ): null }
 
       <PlantForm onSubmit={handleCreatePlant} options={options} />
     </>

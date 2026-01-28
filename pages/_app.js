@@ -17,6 +17,8 @@ export default function App({
   const [favoritePlantIds, setFavoritePlantIds] = useState([]);
   const [hasLoadedFavorites, setHasLoadedFavorites] = useState(false);
 
+  const [authBarHeight, setAuthBarHeight] = useState(0);
+
   useEffect(() => {
     const stored = localStorage.getItem(STORANGE_KEY);
     if (stored) {
@@ -45,7 +47,7 @@ export default function App({
 
   return (
     <SessionProvider session={pageProps.session}>
-      <AuthBar />
+      <AuthBar onHeightChange={setAuthBarHeight}/>
       <main>
         <GlobalStyle />
         <Leaf

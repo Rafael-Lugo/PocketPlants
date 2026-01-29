@@ -13,23 +13,18 @@ export default async function handler(request, response) {
     .toLowerCase()
     .trim();
   const plainPassword = String(password || "");
+  const displayName = String(name || "").trim();
 
-  if (!normalizedEmail || !plainPassword) {
+  if (!normalizedEmail || plainPassword.length < 8) {
     return response
       .status(400)
-      .json({ message: "Email and password are required" });
-  }
-
-  if (plainPassword.length < 8) {
-    return response
-      .status(400)
-      .json({ message: "Password must be at least 8 characters" });
+      .json({ message: "Invalid Input" });
   }
 
   await dbConnect();
 
-  const existing = await User.findOne({ email: normalizedEmail });
-  if (existing) {
+  const existingUser = await User.findOne({ email: normalizedEmail });
+  if (existingUser) {
     return response.status(409).json({ message: "Email already exists" });
   }
 
@@ -38,7 +33,7 @@ export default async function handler(request, response) {
   await User.create({
     email: normalizedEmail,
     passwordHash,
-    name: name ? String(name).trim() : "",
+    name: displayName,
     provider: "credentials",
   });
 

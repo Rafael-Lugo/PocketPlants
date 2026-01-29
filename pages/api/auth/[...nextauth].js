@@ -7,6 +7,7 @@ import bcrypt from "bcrypt";
 
 export const authOptions = {
   session: { strategy: "jwt" },
+  secret: process.env.NEXTAUTH_SECRET,
 
   providers: [
     GithubProvider({
@@ -15,6 +16,7 @@ export const authOptions = {
     }),
 
     CredentialsProvider({
+      id: "credentials",
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
@@ -22,25 +24,50 @@ export const authOptions = {
       },
 
       async authorize(credentials) {
-        const email = credentials?.email?.toLowerCase().trim();
-        const password = credentials?.password;
+        try {
+          const email = String(credentials?.email || "")
+            .toLowerCase()
+            .trim();
+          const password = String(credentials?.password || "");
 
-        if (!email || !password) return null;
+          if (!email || !password) {
+            console.log("[AUTH][CREDENTIALS] Missing email or password");
+            return null;
+          }
 
-        await dbConnect();
+          await dbConnect();
 
-        const user = await User.findOne({ email });
-        if (!user || !user.passwordHash) return null;
+          
+          const user = await User.findOne({ email, provider: "credentials" })
+            .select("+passwordHash")
+            .lean();
 
-        const ok = await bcrypt.compare(password, user.passwordHash);
-        if (!ok) return null;
+          if (!user) {
+            console.log("[AUTH][CREDENTIALS] User not found:", email);
+            return null;
+          }
 
-        return {
-          id: user._id.toString(),
-          email: user.email,
-          name: user.name || user.email,
-          image: user.image || null,
-        };
+          if (!user.passwordHash) {
+            console.log("[AUTH][CREDENTIALS] No passwordHash for user:", email);
+            return null;
+          }
+
+          const ok = await bcrypt.compare(password, user.passwordHash);
+          if (!ok) {
+            console.log("[AUTH][CREDENTIALS] Password mismatch for:", email);
+            return null;
+          }
+
+          return {
+            id: user._id.toString(),
+            email: user.email,
+            name: user.name || user.email,
+            image: user.image || null,
+          };
+        } catch (error) {
+          console.error("[AUTH][CREDENTIALS] authorize error:", error);
+          return null;
+        }
       },
     }),
   ],
@@ -51,8 +78,7 @@ export const authOptions = {
 
       if (account?.provider === "github" && token?.email) {
         await dbConnect();
-
-        const email = token.email.toLowerCase().trim();
+        const email = String(token.email).toLowerCase().trim();
 
         const updateFields = {};
         if (token?.name) updateFields.name = token.name;
@@ -64,11 +90,10 @@ export const authOptions = {
             $setOnInsert: { email, provider: "github" },
             ...(Object.keys(updateFields).length ? { $set: updateFields } : {}),
           },
-
           { upsert: true }
         );
 
-        const dbUser = await User.findOne({ email });
+        const dbUser = await User.findOne({ email }).lean();
         if (dbUser?._id) token.sub = dbUser._id.toString();
       }
 
@@ -76,9 +101,7 @@ export const authOptions = {
     },
 
     async session({ session, token }) {
-      if (session?.user) {
-        session.user.id = token.sub;
-      }
+      if (session?.user) session.user.id = token.sub;
       return session;
     },
   },

@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
-import { ButtonRow, ErrorText, Form, FormGroup, PageTitle, PageWrapper, SubmitButton } from "@/components/Styled/RegisterStyle";
+import {
+  ButtonRow,
+  ErrorText,
+  Form,
+  FormGroup,
+  PageTitle,
+  PageWrapper,
+  SubmitButton,
+} from "@/components/Styled/RegisterStyle";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -30,16 +38,17 @@ export default function RegisterPage() {
 
     const loginResult = await signIn("credentials", {
       redirect: false,
-      email: formState.email,
+      email: formState.email.toLowerCase().trim(),
       password: formState.password,
+      callbackUrl: "/",
     });
 
-    if (loginResult?.error) {
+    if (!loginResult ||loginResult?.error) {
       setErrorMessage("Account created, but login failed. Please sign in.");
       return;
     }
 
-    router.push("/");
+    router.replace(loginResult.url || "/");
   }
 
   function handleNameChange(changeEvent) {
@@ -103,12 +112,13 @@ export default function RegisterPage() {
           />
         </FormGroup>
 
-        
-        {errorMessage ? <ErrorText style={{ color: "red" }}>{errorMessage}</ErrorText> : null}
+        {errorMessage ? (
+          <ErrorText style={{ color: "red" }}>{errorMessage}</ErrorText>
+        ) : null}
 
-       <ButtonRow>
-       <SubmitButton type="submit">Create account</SubmitButton>
-       </ButtonRow>
+        <ButtonRow>
+          <SubmitButton type="submit">Create account</SubmitButton>
+        </ButtonRow>
       </Form>
     </PageWrapper>
   );

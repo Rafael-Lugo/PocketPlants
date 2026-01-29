@@ -14,7 +14,7 @@ const userSchema = new Schema(
     passwordHash: { type: String, select: false },
     name: { type: String, default: "" },
     image: { type: String, default: "" },
-    provider: { type: String, default: "credential" },
+    provider: { type: String, default: "credentials" },
   },
   { timestamps: true }
 );

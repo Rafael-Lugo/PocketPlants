@@ -3,7 +3,7 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import dbConnect from "@/db/connect";
 import User from "@/db/models/User";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export const authOptions = {
   session: { strategy: "jwt" },

@@ -3,7 +3,7 @@ import User from "@/db/models/User";
 import Plant from "@/db/models/Plant";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export default async function handler(request, response) {
   const session = await getServerSession(request, response, authOptions);
